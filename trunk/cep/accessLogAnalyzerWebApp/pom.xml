@@ -7,12 +7,17 @@
 	<name>Real-time CEP Access Log Analizyer</name>
 	<packaging>war</packaging>
 	<version>1.0.0-SNAPSHOT</version>
+    <url>http://tedwon.com</url>
+    <inceptionYear>2011</inceptionYear>
+
 	<properties>
 		<java-version>6</java-version>
 		<org.springframework-version>3.1.0.M2</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
+        <version.esper>4.3.0</version.esper>
 	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -22,6 +27,10 @@
 				<configuration>
 					<source>${java-version}</source>
 					<target>${java-version}</target>
+                    <encoding>UTF-8</encoding>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
+                    <verbose>true</verbose>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -44,7 +53,22 @@
 			</plugin>
 		</plugins>
 	</build>
+
 	<dependencies>
+
+        <!-- Esper -->
+        <dependency>
+            <groupId>com.espertech</groupId>
+            <artifactId>esper</artifactId>
+            <version>${version.esper}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.espertech</groupId>
+            <artifactId>esperio-http</artifactId>
+            <version>${version.esper}</version>
+        </dependency>
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -180,6 +204,7 @@
 		</dependency>
         
 	</dependencies>
+
 	<repositories>	
 		<!-- For testing against latest Spring snapshots -->
 		<repository>
