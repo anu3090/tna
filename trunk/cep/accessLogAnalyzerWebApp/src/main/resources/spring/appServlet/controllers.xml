@@ -11,5 +11,7 @@
 	<mvc:view-controller path="/" view-name="home"/>
 	
 	<context:component-scan base-package="org.springframework.samples.mvc" />
-	 
+
+    <bean class="com.tedwon.pilots.cep.AccessLogAnalyzer" init-method="start" destroy-method="stop"/>
+
 </beans>
