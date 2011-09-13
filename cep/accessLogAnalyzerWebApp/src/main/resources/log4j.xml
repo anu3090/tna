@@ -10,6 +10,29 @@
         </layout>
     </appender>
 
+    <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/home/ted/cep.app.log"/>
+        <param name="Append" value="false"/>
+
+        <!-- Rollover at midnight each day -->
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+
+        <!-- Rollover at the top of each hour
+           <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        -->
+        <param name="Threshold" value="TRACE"/>
+
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- The default pattern: Date Priority [Category] Message\n -->
+            <param name="ConversionPattern" value="%d %-5p [%c] (%t) %m%n"/>
+
+            <!-- The full pattern: Date MS Priority [Category] (Thread:NDC) Message\n
+           <param name="ConversionPattern" value="%d %-5r %-5p [%c] (%t:%x) %m%n"/>
+            -->
+        </layout>
+    </appender>
+
+
     <!-- Application Loggers -->
     <logger name="com.tedwon.pilots.cep">
         <level value="trace"/>
@@ -44,6 +67,7 @@
     <root>
         <priority value="warn"/>
         <appender-ref ref="console"/>
+        <appender-ref ref="FILE"/>
     </root>
 
 </log4j:configuration>
