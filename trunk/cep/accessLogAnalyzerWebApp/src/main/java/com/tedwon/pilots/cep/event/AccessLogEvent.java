@@ -8,19 +8,39 @@ package com.tedwon.pilots.cep.event;
  */
 public class AccessLogEvent {
 
-    private String ipAddress;
 
-    private String page;
+    // date,querytime,username,ipAddress,page
+
 
     private String date;
+    private String querytime;
+    private String username;
+    private String ipAddress;
+    private String page;
 
-    public AccessLogEvent() {
+
+    public String getDate() {
+        return date;
     }
 
-    public AccessLogEvent(String ipAddress, String page, String date) {
-        this.ipAddress = ipAddress;
-        this.page = page;
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getQuerytime() {
+        return querytime;
+    }
+
+    public void setQuerytime(String querytime) {
+        this.querytime = querytime;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getIpAddress() {
@@ -37,23 +57,6 @@ public class AccessLogEvent {
 
     public void setPage(String page) {
         this.page = page;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    @Override
-    public String toString() {
-        return "AccessLogEvent{" +
-                "ipAddress='" + ipAddress + '\'' +
-                ", page='" + page + '\'' +
-                ", date='" + date + '\'' +
-                '}';
     }
 }
 
