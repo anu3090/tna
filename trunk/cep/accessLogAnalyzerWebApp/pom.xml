@@ -70,13 +70,13 @@
             <version>${version.esper}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.atlassian.seraph</groupId>
-            <artifactId>atlassian-seraph</artifactId>
-            <version>2.5.1</version>
-            <scope>system</scope>
-            <systemPath>/Users/ted/study/tna/tna/cep/accessLogAnalyzerWebApp/lib/atlassian-seraph-2.5.1.jar</systemPath>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.atlassian.seraph</groupId>-->
+            <!--<artifactId>atlassian-seraph</artifactId>-->
+            <!--<version>2.5.1</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>/Users/ted/study/tna/tna/cep/accessLogAnalyzerWebApp/lib/atlassian-seraph-2.5.1.jar</systemPath>-->
+        <!--</dependency>-->
 
 		<!-- Spring -->
 		<dependency>
