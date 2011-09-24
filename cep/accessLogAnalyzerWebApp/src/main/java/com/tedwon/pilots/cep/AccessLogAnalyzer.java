@@ -54,7 +54,7 @@ public class AccessLogAnalyzer {
         epService = EPServiceProviderManager.getProvider(providerURI, config);
 
         // Register EPL
-        String expression = "select date from AccessLogEvent.win:time(30 sec)";
+        String expression = "select * from AccessLogEvent.win:time(30 sec)";
         statement = epService.getEPAdministrator().createEPL(expression);
 
         // Register Process Result Listener
@@ -94,10 +94,15 @@ public class AccessLogAnalyzer {
 
         public void update(EventBean[] newEvents, EventBean[] oldEvents) {
 
-            logger.trace("call MyListener.update()");
+            logger.info("call MyListener.update()");
 
             EventBean event = newEvents[0];
-            System.out.println("date=" + event.get("date"));
+            logger.info("date={}", event.get("date"));
+            logger.info("querytime={}", event.get("querytime"));
+            logger.info("username={}", event.get("username"));
+            logger.info("ipAddress={}", event.get("ipAddress"));
+            logger.info("page={}", event.get("page"));
+
         }
     }
 
