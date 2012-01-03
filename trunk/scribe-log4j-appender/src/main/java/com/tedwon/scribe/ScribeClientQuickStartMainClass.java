@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class ScribeClientQuickStartMainClass {
 
-    private static String scribeHost = "tedwon.com";
+    private static String scribeHost = "localhost";
     private static int scribePort = 1463;
     private static String scribeCategory = "test";
 
