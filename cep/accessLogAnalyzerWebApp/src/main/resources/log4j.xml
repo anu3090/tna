@@ -11,7 +11,7 @@
     </appender>
 
     <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="/home/ted/cep.app.log"/>
+        <param name="File" value="/tmp/cep.app.log"/>
         <param name="Append" value="false"/>
 
         <!-- Rollover at midnight each day -->
@@ -65,7 +65,7 @@
 
     <!-- Root Logger -->
     <root>
-        <priority value="warn"/>
+        <priority value="trace"/>
         <appender-ref ref="console"/>
         <appender-ref ref="FILE"/>
     </root>

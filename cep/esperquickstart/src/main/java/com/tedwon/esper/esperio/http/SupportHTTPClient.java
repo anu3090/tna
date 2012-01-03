@@ -10,7 +10,11 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLEncoder;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class SupportHTTPClient {
     private static Log log = LogFactory.getLog(SupportHTTPClient.class);
@@ -23,7 +27,7 @@ public class SupportHTTPClient {
 
     public void request(int port, String document, String... params) throws Exception {
         String uri = "http://localhost:" + port + "/" + document;
-        URI requestURI = URIUtil.withQuery(new URI(uri), params);
+        URI requestURI = withQuery(new URI(uri), params);
         log.info("Requesting from URI " + requestURI);
         HttpGet httpget = new HttpGet(requestURI);
 
@@ -34,6 +38,35 @@ public class SupportHTTPClient {
         } catch (IOException e) {
             throw new RuntimeException("Error executing request:" + e.getMessage());
         }
+    }
+
+    public static URI withQuery(URI uri, String... params) {
+        Map<String, String> map = new LinkedHashMap<String, String>();
+        for (int i = 0; i < params.length; i += 2) {
+            String key = params[i];
+            String val = i + 1 < params.length ? params[i + 1] : "";
+            map.put(key, val);
+        }
+        return withQuery(uri, map);
+    }
+
+    public static URI withQuery(URI uri, Map<String, String> params) {
+        StringBuilder query = new StringBuilder();
+        char separator = '?';
+        for (Map.Entry<String, String> param : params.entrySet()) {
+            query.append(separator);
+            separator = '&';
+            try {
+                query.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+                if (param.getValue().length() != 0) {
+                    query.append('=');
+                    query.append(URLEncoder.encode(param.getValue(), "UTF-8"));
+                }
+            } catch (UnsupportedEncodingException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return URI.create(uri.toString() + query.toString());
     }
 
     public static void main(String args[]) throws Exception {
