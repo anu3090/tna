@@ -20,12 +20,12 @@ public class ScribeServerMainClassTest {
     public void runServer() {
         try {
 
-            TServerSocket serverTransport = new TServerSocket(1463);
+            TServerSocket serverTransport = new TServerSocket(2463);
             scribe.Processor processor = new scribe.Processor(new ScribeLogImpl());
             TBinaryProtocol.Factory protFactory = new TBinaryProtocol.Factory(false, false);
             TServer server = new TThreadPoolServer(processor, serverTransport, protFactory);
 
-            System.out.println("Starting server on port 1463 ...");
+            System.out.println("Starting server on port 2463 ...");
 
             server.serve();
 
