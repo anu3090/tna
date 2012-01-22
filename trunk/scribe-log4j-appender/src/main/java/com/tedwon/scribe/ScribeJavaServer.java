@@ -18,7 +18,7 @@ public class ScribeJavaServer {
 
     public static scribe.thrift.scribe.Processor processor;
     
-    public static int PORT = 9090;
+    public static int PORT = 2463;
 
     public void runServer() {
 
