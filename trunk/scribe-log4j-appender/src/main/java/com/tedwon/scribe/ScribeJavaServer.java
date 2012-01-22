@@ -1,19 +1,20 @@
 package com.tedwon.scribe;
 
 import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TCompactProtocol;
 import org.apache.thrift.server.THsHaServer;
 import org.apache.thrift.server.TServer;
-import org.apache.thrift.server.TSimpleServer;
 import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TNonblockingServerSocket;
 
 /**
- * Created by IntelliJ IDEA.
- * User: ted
- * Date: 1/22/12
- * Time: 8:45 AM
- * To change this template use File | Settings | File Templates.
+ * Scribe Server in Java Class.
+ * <p/>
+ * <p/>This server can receive messages from Scribe central server.
+ * <p/>It Also can be applied to integrating with Scribe and Java Application.
+ * <p/>For instance, Esper real-time Application and Scribe Log Aggregator.
+ *
+ * @author <a href=mailto:tedd824@gmail.com">Ted Won</a>
+ * @version 1.0
  */
 public class ScribeJavaServer {
 

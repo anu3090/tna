@@ -2,10 +2,8 @@ package com.tedwon.scribe;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TSocket;
-import org.apache.thrift.transport.TTransport;
 import scribe.thrift.LogEntry;
 
 import java.net.Socket;
@@ -13,11 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
- * User: ted
- * Date: 1/22/12
- * Time: 8:46 AM
- * To change this template use File | Settings | File Templates.
+ * Scribe Client in Java Class.
+ * <p/>
+ * <p/>This server can receive messages from Scribe central server.
+ * <p/>It Also can be applied to integrating with Scribe and Java Application.
+ * <p/>For instance, Esper real-time Application and Scribe Log Aggregator.
+ *
+ * @author <a href=mailto:tedd824@gmail.com">Ted Won</a>
+ * @version 1.0
  */
 public class ScribeJavaClient {
 
@@ -27,8 +28,6 @@ public class ScribeJavaClient {
 
         try {
 
-//            TSocket sock = new TSocket(new Socket("115.68.2.182", 1464));
-//            TSocket sock = new TSocket(new Socket("115.68.2.182", 2463));
             TSocket sock = new TSocket(new Socket("localhost", ScribeJavaServer.PORT));
             TFramedTransport transport = new TFramedTransport(sock);
             TBinaryProtocol protocol = new TBinaryProtocol(transport, false, false);
