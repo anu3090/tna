@@ -3,10 +3,12 @@ package com.tedwon.scribe;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import scribe.thrift.LogEntry;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,26 +21,25 @@ import java.util.List;
  */
 public class ScribeJavaClient {
 
-    private static String scribeCategory = "test";
+    private static String scribeCategory = "default";
 
     public static void main(String[] args) {
 
         try {
 
-            TTransport transport;
+//            TSocket sock = new TSocket(new Socket("115.68.2.182", 1464));
+//            TSocket sock = new TSocket(new Socket("115.68.2.182", 2463));
+            TSocket sock = new TSocket(new Socket("localhost", ScribeJavaServer.PORT));
+            TFramedTransport transport = new TFramedTransport(sock);
+            TBinaryProtocol protocol = new TBinaryProtocol(transport, false, false);
 
-            transport = new TSocket("localhost", ScribeJavaServer.PORT);
-            transport.open();
-
-
-            TProtocol protocol = new TBinaryProtocol(transport);
             scribe.thrift.scribe.Client client = new scribe.thrift.scribe.Client(protocol);
 
             perform(client);
 
             transport.close();
 
-        } catch (TException x) {
+        } catch (Exception x) {
             x.printStackTrace();
         }
     }
