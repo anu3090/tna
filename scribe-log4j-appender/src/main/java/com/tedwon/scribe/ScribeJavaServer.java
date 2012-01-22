@@ -30,7 +30,7 @@ public class ScribeJavaServer {
             TServerTransport serverTransport = new TServerSocket(PORT);
             TServer server = new TSimpleServer(processor, serverTransport);
 
-            System.out.println("Starting the ScribeJavaServer... on PORT: " + 9090);
+            System.out.println("Starting the ScribeJavaServer... on PORT: " + PORT);
 
             server.serve();
 
