@@ -34,15 +34,30 @@
 
     <dependencies>
 
-        <!-- Jakarta Commons-IO API -->
+        <!-- ============= -->
+        <!-- Thrift API   -->
+        <!-- ============= -->
+
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>
+            <version>0.6.1</version>
+        </dependency>
+
+
+        <!-- ======================== -->
+        <!-- Jakarta Commons-IO API   -->
+        <!-- ======================== -->
+
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.1</version>
         </dependency>
 
+
         <!-- ============= -->
-        <!--  Logging API  -->
+        <!-- Logging API   -->
         <!-- ============= -->
 
         <dependency>
@@ -69,13 +84,14 @@
             <scope>runtime</scope>
         </dependency>
 
+
         <!-- ====================== -->
-        <!--  Dependency for Test   -->
+        <!-- Dependency for Test   -->
         <!-- ====================== -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.4</version>
+            <version>4.10</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
