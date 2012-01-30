@@ -9,10 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import scribe.thrift.LogEntry;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,38 +29,45 @@ public class ScribeClient {
     private static Logger logger = LoggerFactory.getLogger(ScribeClient.class);
 
     private static String scribeCategory = "default";
-
-    public static void main(String[] args) throws Exception {
-
-        // Read a file from local file system
-
-        String filePath = "/tmp/test.dat";
-        File inputFile = FileUtils.getFile(filePath);
-        InputStream input = FileUtils.openInputStream(inputFile);
-        InputStreamReader inputStreamReader = new InputStreamReader(input, "UTF-8");
-        BufferedReader reader = new BufferedReader(inputStreamReader);
-        String line = reader.readLine();
+    private static String scribeHost = "localhost";
+    private static int scribePort = 1463;
 
 
-        // Open connection to Scribe Server
+    public static void main(String[] args) {
 
-        TSocket sock = new TSocket(new Socket("localhost", 1463));
-        TFramedTransport transport = new TFramedTransport(sock);
-        TBinaryProtocol protocol = new TBinaryProtocol(transport, false, false);
+        try {
+            // Read a file from local file system
 
-        scribe.thrift.scribe.Client client = new scribe.thrift.scribe.Client(protocol);
+            String filePath = "/tmp/dummy.dat";
+            File inputFile = FileUtils.getFile(filePath);
+            InputStream input = FileUtils.openInputStream(inputFile);
+            InputStreamReader inputStreamReader = new InputStreamReader(input, "UTF-8");
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+            String line = reader.readLine();
 
-        while (line != null) {
 
-            System.out.println(line);
+            // Open connection to Scribe Server
 
-            perform(client, line);
+            TSocket sock = new TSocket(new Socket(ScribeClient.scribeHost, ScribeClient.scribePort));
+            TFramedTransport transport = new TFramedTransport(sock);
+            TBinaryProtocol protocol = new TBinaryProtocol(transport, false, false);
 
-            line = reader.readLine();
+            scribe.thrift.scribe.Client client = new scribe.thrift.scribe.Client(protocol);
 
+            while (line != null) {
+
+                System.out.println(line);
+
+                perform(client, line);
+
+                line = reader.readLine();
+
+            }
+
+            transport.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        transport.close();
 
     }
 
@@ -71,7 +75,7 @@ public class ScribeClient {
 
         List<LogEntry> logEntries = new ArrayList<LogEntry>(1);
 
-        LogEntry entry = new LogEntry(scribeCategory, message);
+        LogEntry entry = new LogEntry(ScribeClient.scribeCategory, message);
         logEntries.add(entry);
 
         client.Log(logEntries);
