@@ -56,8 +56,6 @@ public class ScribeClient {
 
             while (line != null) {
 
-                System.out.println(line);
-
                 perform(client, line);
 
                 line = reader.readLine();
