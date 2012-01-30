@@ -69,7 +69,7 @@ public class ScribeClient {
 
             double curr = System.currentTimeMillis();
             double executiontime = (curr - start) / 1000;
-            logger.debug("Execution Time: " + executiontime);
+            logger.debug("Execution Time: " + executiontime + " sec");
 
             transport.close();
         } catch (Exception e) {
