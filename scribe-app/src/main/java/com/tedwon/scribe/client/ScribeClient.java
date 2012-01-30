@@ -29,7 +29,8 @@ public class ScribeClient {
     private static Logger logger = LoggerFactory.getLogger(ScribeClient.class);
 
     private static String scribeCategory = "default";
-    private static String scribeHost = "localhost";
+//    private static String scribeHost = "localhost";
+    private static String scribeHost = "tedwon.com";
     private static int scribePort = 1463;
 
 
@@ -54,6 +55,10 @@ public class ScribeClient {
 
             scribe.thrift.scribe.Client client = new scribe.thrift.scribe.Client(protocol);
 
+
+            double start = System.currentTimeMillis();
+            logger.debug("Start Time: " + start);
+
             while (line != null) {
 
                 perform(client, line);
@@ -61,6 +66,10 @@ public class ScribeClient {
                 line = reader.readLine();
 
             }
+
+            double curr = System.currentTimeMillis();
+            double executiontime = (curr - start) / 1000;
+            logger.debug("Execution Time: " + executiontime);
 
             transport.close();
         } catch (Exception e) {
