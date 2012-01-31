@@ -29,8 +29,7 @@ public class ScribeClient {
     private static Logger logger = LoggerFactory.getLogger(ScribeClient.class);
 
     private static String scribeCategory = "default";
-//    private static String scribeHost = "localhost";
-    private static String scribeHost = "tedwon.com";
+    private static String scribeHost = "localhost";
     private static int scribePort = 1463;
 
 
