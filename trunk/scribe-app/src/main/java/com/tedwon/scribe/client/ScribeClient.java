@@ -1,5 +1,6 @@
 package com.tedwon.scribe.client;
 
+import com.tedwon.utils.DateUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -54,9 +55,8 @@ public class ScribeClient {
 
             scribe.thrift.scribe.Client client = new scribe.thrift.scribe.Client(protocol);
 
-
             double start = System.currentTimeMillis();
-            logger.debug("Start Time: " + start);
+            logger.debug("Start     Time: " + DateUtils.getDateTime((long) start));
 
             while (line != null) {
 
@@ -68,6 +68,7 @@ public class ScribeClient {
 
             double curr = System.currentTimeMillis();
             double executiontime = (curr - start) / 1000;
+            logger.debug("End       Time: " + DateUtils.getDateTime((long)curr));
             logger.debug("Execution Time: " + executiontime + " sec");
 
             transport.close();
