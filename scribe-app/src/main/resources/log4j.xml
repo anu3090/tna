@@ -44,37 +44,10 @@
    <!-- Limit categories -->
    <!-- ================ -->
 
-   <category name="org.infinispan">
+   <category name="com.tedwon">
       <priority value="DEBUG"/>
    </category>
 
-   <category name="org.infinispan.profiling">
-      <priority value="DEBUG"/>
-   </category>
-
-   <category name="org.infinispan.jmx">
-      <priority value="DEBUG"/>
-   </category>
-
-   <category name="org.infinispan.factories">
-      <priority value="DEBUG"/>
-   </category>
-
-   <category name="org.infinispan.client.hotrod">
-      <priority value="DEBUG"/>
-   </category>
-
-   <category name="org.infinispan.lucene">
-      <priority value="DEBUG"/>
-   </category>
-
-   <category name="com.mchange">
-      <priority value="DEBUG"/>
-   </category>
-
-   <category name="org.jgroups">
-      <priority value="DEBUG"/>
-   </category>
 
    <!-- ======================= -->
    <!-- Setup the Root category -->
