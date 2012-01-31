@@ -64,7 +64,8 @@
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>com.tedwon.scribe.client.ScribeClient</mainClass>
+                            <!--<mainClass>com.tedwon.scribe.client.ScribeClient</mainClass>-->
+                            <mainClass>com.tedwon.flume.client.FlumeClient</mainClass>
                         </configuration>
                     </execution>
                 </executions>
