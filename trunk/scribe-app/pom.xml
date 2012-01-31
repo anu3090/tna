@@ -58,8 +58,8 @@
                 <version>1.2.1</version>
                 <executions>
                     <execution>
-                        <id>test-run</id>
-                        <phase>test</phase>
+                        <id>scribe-client-run</id>
+                        <phase>install</phase>
                         <goals>
                             <goal>java</goal>
                         </goals>
