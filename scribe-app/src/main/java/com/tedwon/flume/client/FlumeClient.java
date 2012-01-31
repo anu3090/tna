@@ -6,22 +6,12 @@ import flume.thrift.ThriftFlumeEventServer;
 import org.apache.commons.io.FileUtils;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.transport.TFramedTransport;
-import org.apache.thrift.transport.TSocket;
+import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.transport.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import scribe.thrift.LogEntry;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.Socket;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
 
 
 /**
@@ -38,9 +28,10 @@ public class FlumeClient {
     private static Logger logger = LoggerFactory.getLogger(FlumeClient.class);
 
     private static String scribeCategory = "default";
-//    private static String scribeHost = "localhost";
-    private static String flumeHost = "muda1120.cafe24.com";
-    private static int flumePort = 35865;
+    //    private static String scribeHost = "localhost";
+//    private static String flumeHost = "muda1120.cafe24.com";
+    private static String flumeHost = "tedwon.com";
+    private static int flumePort = 35853;
 
 
     public static void main(String[] args) {
@@ -55,25 +46,24 @@ public class FlumeClient {
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line = reader.readLine();
 
+            int timeout = 100000;
 
-            // Open connection to Scribe Server
+            TTransport transport = new TSocket(FlumeClient.flumeHost, FlumeClient.flumePort, timeout);
+            TStatsTransport stats = new TStatsTransport(transport);
 
-            TSocket sock = new TSocket(new Socket(FlumeClient.flumeHost, FlumeClient.flumePort));
-            TFramedTransport transport = new TFramedTransport(sock);
-
-            TBinaryProtocol protocol = new TBinaryProtocol(transport, false, false);
-//            transport.open();
-
+            TProtocol protocol = new TBinaryProtocol(stats);
+            transport.open();
             ThriftFlumeEventServer.Client client = new ThriftFlumeEventServer.Client(protocol);
+
 
             double start = System.currentTimeMillis();
             logger.debug("Start Time: " + start);
 
             while (line != null) {
 
-                perform(client, line);
+            perform(client, line);
 
-                line = reader.readLine();
+            line = reader.readLine();
 
             }
 
@@ -82,25 +72,25 @@ public class FlumeClient {
             logger.debug("Execution Time: " + executiontime + " sec");
 
             transport.close();
+//            client.send_close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    private static void perform(ThriftFlumeEventServer.Client client, String message) throws TException {
-        ThriftFlumeEvent event = new ThriftFlumeEvent(
-                System.currentTimeMillis(),
-                Priority.INFO,
-                ByteBuffer.wrap(message.getBytes()),
-                System.nanoTime(),
-            "muda1120.cafe24.com",
-            new HashMap<String,ByteBuffer>()
-        );
-//        event.setBody(message.getBytes());
+    private static void perform(ThriftFlumeEventServer.Client client, String message) throws TException, IOException {
 
+        ThriftFlumeEvent event = new ThriftFlumeEvent();
+
+        event.setPriority(Priority.INFO);
+        event.setTimestamp(System.currentTimeMillis());
+        event.setNanos(System.nanoTime());
+        event.setBody(message.getBytes());
         client.append(event);
-//        client.send_append(event);
+////        client.close();
+//
+//        client.send_close();
 
     }
 }
