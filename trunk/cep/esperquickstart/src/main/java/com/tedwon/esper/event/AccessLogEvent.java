@@ -1,11 +1,13 @@
 package com.tedwon.esper.event;
 
 /**
- * Created by IntelliJ IDEA.
- * User: ted
- * Date: 9/8/11
- * Time: 6:16 AM
- * To change this template use File | Settings | File Templates.
+ * Access Log Event Class.
+ *
+ * <p/>See http://esper.codehaus.org/tutorials/tutorial/quickstart.html
+ * <p/>See http://esper.codehaus.org/esperio-4.3.0/doc/reference/en/html/adapter_http.html
+ *
+ * @author <a href=mailto:tedd824@gmail.com">Ted Won</a>
+ * @version 1.0
  */
 public class AccessLogEvent {
 
