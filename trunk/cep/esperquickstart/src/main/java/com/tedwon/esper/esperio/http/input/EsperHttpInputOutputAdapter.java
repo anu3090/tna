@@ -11,7 +11,7 @@ import com.tedwon.esper.esperio.http.SupportHTTPServer;
 import java.util.Properties;
 
 /**
- * Espert Quick Start Class.
+ * Esper Quick Start Class.
  * <p/>See http://esper.codehaus.org/tutorials/tutorial/quickstart.html
  * <p/>See http://esper.codehaus.org/esperio-4.3.0/doc/reference/en/html/adapter_http.html
  * <p/>HTTP Request URI Sample: http://localhost:8079/sendevent?stream=MyFirewallEvent&name=Joe&changed=true

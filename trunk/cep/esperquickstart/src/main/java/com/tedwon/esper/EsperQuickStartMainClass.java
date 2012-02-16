@@ -3,7 +3,7 @@ package com.tedwon.esper;
 import com.espertech.esper.client.*;
 
 /**
- * Espert Quick Start Class.
+ * Esper Quick Start Class.
  * <p/>See http://esper.codehaus.org/tutorials/tutorial/quickstart.html
  *
  * @author Ted Won
