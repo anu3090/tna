@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.tedwon.jboss.byteman</groupId>
+    <artifactId>byteman-demo</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Byteman Demo Application</name>
+    <url>http://tedwon.com</url>
+    <inceptionYear>2012</inceptionYear>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <compiler.plugin.version>2.3.2</compiler.plugin.version>
+        <version.log4j>1.2.16</version.log4j>
+    </properties>
+
+    <build>
+        <plugins>
+            <!-- Java Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler.plugin.version}</version>
+                <configuration>
+                    <source>6</source>
+                    <target>6</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>        
+        </plugins>
+    </build>
+
+    <dependencies>
+
+        <dependency>
+           <groupId>log4j</groupId>
+           <artifactId>log4j</artifactId>
+           <version>${version.log4j}</version>
+           <optional>true</optional>
+        </dependency>
+
+        <!-- ====================== -->
+        <!-- Dependency for Test   -->
+        <!-- ====================== -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+    
+    </dependencies>
+
+    <!-- Organization Information -->
+    <organization>
+        <name>Ted Won</name>
+        <url>http://tedwon.com</url>
+    </organization>
+
+    <!-- Developer Information -->
+    <developers>
+        <developer>
+            <id>ted</id>
+            <name>Ted Won</name>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <email>iamtedwon@gmail.com</email>
+        </developer>
+    </developers>
+    
+</project>
