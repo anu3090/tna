@@ -16,7 +16,7 @@ import java.util.Properties;
  * <p/>See http://esper.codehaus.org/esperio-4.3.0/doc/reference/en/html/adapter_http.html
  * <p/>HTTP Request URI Sample: http://localhost:8079/sendevent?stream=MyFirewallEvent&name=Joe&changed=true
  *
- * @author <a href=mailto:tedd824@gmail.com">Ted Won</a>
+ * @author <a href=mailto:iamtedwon@gmail.com">Ted Won</a>
  * @version 1.0
  */
 public class EsperHttpInputOutputAdapter {
@@ -65,7 +65,7 @@ public class EsperHttpInputOutputAdapter {
 
 
         /**
-         * Configure EPL Statement
+         * Publish EPL Statement
          */
         String expression = "insert into SupportBean select ipAddress, page, date from AccessLogEvent.win:time(30 sec)";
         EPStatement statement = epService.getEPAdministrator().createEPL(expression);
@@ -84,6 +84,9 @@ public class EsperHttpInputOutputAdapter {
         SupportHTTPServer server8085 = new SupportHTTPServer(8085);
         server8085.start();
 
+        /**
+         * Subscribe EPL Statement Listener
+         */
         MyListener listener = new MyListener();
         statement.addListener(listener);
 
