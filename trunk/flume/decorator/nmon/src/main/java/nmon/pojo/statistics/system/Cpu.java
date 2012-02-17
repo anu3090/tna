@@ -1,4 +1,4 @@
-package nmon.pojo.statistics;
+package nmon.pojo.statistics.system;
 
 /**
  * Created by IntelliJ IDEA.
@@ -7,28 +7,27 @@ package nmon.pojo.statistics;
  * Time: PM 3:13
  * To change this template use File | Settings | File Templates.
  */
-public class CpuAll {
+public class Cpu {
+    private String cpuName;
     private String user;
     private String sys;
     private String wait;
     private String idle;
-    private String busy;
-    private String cpus;
 
-    public String getBusy() {
-        return busy;
+    public Cpu(String cpuName, String idle, String sys, String user, String wait) {
+        this.cpuName = cpuName;
+        this.idle = idle;
+        this.sys = sys;
+        this.user = user;
+        this.wait = wait;
     }
 
-    public void setBusy(String busy) {
-        this.busy = busy;
+    public String getCpuName() {
+        return cpuName;
     }
 
-    public String getCpus() {
-        return cpus;
-    }
-
-    public void setCpus(String cpus) {
-        this.cpus = cpus;
+    public void setCpuName(String cpuName) {
+        this.cpuName = cpuName;
     }
 
     public String getIdle() {
@@ -61,5 +60,16 @@ public class CpuAll {
 
     public void setWait(String wait) {
         this.wait = wait;
+    }
+
+    @Override
+    public String toString() {
+        return "Cpu{" +
+                "cpuName='" + cpuName + '\'' +
+                ", user='" + user + '\'' +
+                ", sys='" + sys + '\'' +
+                ", wait='" + wait + '\'' +
+                ", idle='" + idle + '\'' +
+                '}';
     }
 }

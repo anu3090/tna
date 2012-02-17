@@ -14,7 +14,7 @@ import java.util.Map;
  * Time: PM 4:52
  * To change this template use File | Settings | File Templates.
  */
-public class CmonUtils {
+public class NmonUtils {
     
     public static final String BBBP_PROCNETDEV = "/proc/net/dev";
 

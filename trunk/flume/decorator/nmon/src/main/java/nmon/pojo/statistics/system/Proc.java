@@ -1,4 +1,4 @@
-package nmon.pojo.statistics;
+package nmon.pojo.statistics.system;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,6 +18,19 @@ public class Proc {
     private String exec;
     private String sem;
     private String msg;
+
+    public Proc(String runnable, String blocked, String pswitch, String syscall, String read, String write, String fork, String exec, String sem, String msg) {
+        this.runnable = runnable;
+        this.blocked = blocked;
+        this.pswitch = pswitch;
+        this.syscall = syscall;
+        this.read = read;
+        this.write = write;
+        this.fork = fork;
+        this.exec = exec;
+        this.sem = sem;
+        this.msg = msg;
+    }
 
     public String getBlocked() {
         return blocked;
@@ -97,5 +110,21 @@ public class Proc {
 
     public void setWrite(String write) {
         this.write = write;
+    }
+
+    @Override
+    public String toString() {
+        return "Proc{" +
+                "blocked='" + blocked + '\'' +
+                ", runnable='" + runnable + '\'' +
+                ", pswitch='" + pswitch + '\'' +
+                ", syscall='" + syscall + '\'' +
+                ", read='" + read + '\'' +
+                ", write='" + write + '\'' +
+                ", fork='" + fork + '\'' +
+                ", exec='" + exec + '\'' +
+                ", sem='" + sem + '\'' +
+                ", msg='" + msg + '\'' +
+                '}';
     }
 }
