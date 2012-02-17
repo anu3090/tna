@@ -1,4 +1,4 @@
-package com.tedwon.esper.esperio.http.input;
+package com.tedwon.cep.http.input;
 
 import com.espertech.esper.client.Configuration;
 import com.espertech.esper.client.EPServiceProvider;
@@ -7,7 +7,7 @@ import com.espertech.esper.client.EPStatement;
 import com.espertech.esper.client.EventBean;
 import com.espertech.esper.client.UpdateListener;
 import com.espertech.esperio.http.EsperIOHTTPAdapterPlugin;
-import com.tedwon.esper.esperio.http.SupportHTTPClient;
+import com.tedwon.cep.http.SupportHTTPClient;
 
 import java.util.Properties;
 
