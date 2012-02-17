@@ -97,4 +97,17 @@
         <name>Ted Won</name>
         <url>http://tedwon.com</url>
     </organization>
+
+    <!-- Developer Information -->
+    <developers>
+        <developer>
+            <id>ted</id>
+            <name>Ted Won</name>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <email>iamtedwon@gmail.com</email>
+        </developer>
+    </developers>
+
 </project>

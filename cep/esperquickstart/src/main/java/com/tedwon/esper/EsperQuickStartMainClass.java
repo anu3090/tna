@@ -5,34 +5,60 @@ import com.espertech.esper.client.*;
 /**
  * Esper Quick Start Class.
  * <p/>See http://esper.codehaus.org/tutorials/tutorial/quickstart.html
+ * <p/>See http://esper.codehaus.org/esperio-4.3.0/doc/reference/en/html/adapter_http.html
+ * <p/>HTTP Request URI Sample: http://localhost:8079/sendevent?stream=MyFirewallEvent&name=Joe&changed=true
  *
- * @author Ted Won
+ * @author <a href=mailto:iamtedwon@gmail.com">Ted Won</a>
  * @version 1.0
  */
 public class EsperQuickStartMainClass {
 
     public void run() {
 
+
+        /**
+         * Configure CEP Engine Option
+         */
         Configuration config = new Configuration();
         config.addEventTypeAutoName("com.tedwon.esper");
+
+        /**
+         * Create CEP Engine Instance
+         */
         EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider(config);
+
+        /**
+         * Publish EPL Statement
+         */
         String expression = "select Math.max(2, 3) as mymax, avg(price) from com.tedwon.esper.EsperQuickStartMainClass$OrderEvent.win:time(30 sec)";
         EPStatement statement = epService.getEPAdministrator().createEPL(expression);
 
+        /**
+         * Subscribe EPL Statement Listener
+         */
         MyListener listener = new MyListener();
         statement.addListener(listener);
 
+        /**
+         * Send sample Event for TEST
+         */
         OrderEvent event = new OrderEvent("shirt", 74.50);
         epService.getEPRuntime().sendEvent(event);
+
+        /**
+         * Destory CEP Engine Instance
+         */
+        epService.destroy();
+
     }
 
-    public static void main(String[] args) {
-        EsperQuickStartMainClass test = new EsperQuickStartMainClass();
-        test.run();
-    }
-
+    /**
+     * Sample EPL Statement Listener ==> Output Adapter
+     */
     public class MyListener implements UpdateListener {
+
         public void update(EventBean[] newEvents, EventBean[] oldEvents) {
+
             EventBean event = newEvents[0];
             System.out.println("avg=" + event.get("avg(price)"));
             System.out.println("mymax=" + event.get("mymax"));
@@ -40,6 +66,9 @@ public class EsperQuickStartMainClass {
     }
 
 
+    /**
+     * Sample Order Event
+     */
     public class OrderEvent {
 
         private String itemName;
@@ -59,4 +88,11 @@ public class EsperQuickStartMainClass {
         }
     }
 
+
+    public static void main(String[] args) {
+
+        EsperQuickStartMainClass startMainClass = new EsperQuickStartMainClass();
+
+        startMainClass.run();
+    }
 }
