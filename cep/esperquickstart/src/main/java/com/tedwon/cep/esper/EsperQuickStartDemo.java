@@ -1,4 +1,4 @@
-package com.tedwon.cep;
+package com.tedwon.cep.esper;
 
 import com.espertech.esper.client.Configuration;
 import com.espertech.esper.client.EPServiceProvider;
@@ -26,7 +26,7 @@ public class EsperQuickStartDemo {
          * Configure CEP Engine Option
          */
         Configuration config = new Configuration();
-        config.addEventTypeAutoName("com.tedwon.esper");
+        config.addEventTypeAutoName("com.tedwon.cep.esper");
 
         /**
          * Create CEP Engine Instance
@@ -36,7 +36,7 @@ public class EsperQuickStartDemo {
         /**
          * Publish EPL Statement
          */
-        String expression = "select Math.max(2, 3) as mymax, avg(price) from com.tedwon.esper.EsperQuickStartDemo$OrderEvent.win:time(30 sec)";
+        String expression = "select Math.max(2, 3) as mymax, avg(price) from com.tedwon.cep.esper.EsperQuickStartDemo$OrderEvent.win:time(30 sec)";
         EPStatement statement = epService.getEPAdministrator().createEPL(expression);
 
         /**
