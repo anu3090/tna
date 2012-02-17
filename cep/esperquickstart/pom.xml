@@ -13,7 +13,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.esper>4.3.0</version.esper>
+        <version.esper>4.5.0</version.esper>
         <version.log4j>1.2.16</version.log4j>
     </properties>
 
