@@ -1,6 +1,11 @@
 package com.tedwon.esper.esperio.http.input;
 
-import com.espertech.esper.client.*;
+import com.espertech.esper.client.Configuration;
+import com.espertech.esper.client.EPServiceProvider;
+import com.espertech.esper.client.EPServiceProviderManager;
+import com.espertech.esper.client.EPStatement;
+import com.espertech.esper.client.EventBean;
+import com.espertech.esper.client.UpdateListener;
 import com.espertech.esperio.http.EsperIOHTTPAdapter;
 import com.espertech.esperio.http.EsperIOHTTPAdapterPlugin;
 import com.espertech.esperio.http.config.ConfigurationHTTPAdapter;
