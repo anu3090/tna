@@ -1,6 +1,11 @@
 package com.tedwon.esper;
 
-import com.espertech.esper.client.*;
+import com.espertech.esper.client.Configuration;
+import com.espertech.esper.client.EPServiceProvider;
+import com.espertech.esper.client.EPServiceProviderManager;
+import com.espertech.esper.client.EPStatement;
+import com.espertech.esper.client.EventBean;
+import com.espertech.esper.client.UpdateListener;
 
 /**
  * Esper Quick Start Class.
@@ -11,7 +16,7 @@ import com.espertech.esper.client.*;
  * @author <a href=mailto:iamtedwon@gmail.com">Ted Won</a>
  * @version 1.0
  */
-public class EsperQuickStartMainClass {
+public class EsperQuickStartDemo {
 
     public void run() {
 
@@ -30,7 +35,7 @@ public class EsperQuickStartMainClass {
         /**
          * Publish EPL Statement
          */
-        String expression = "select Math.max(2, 3) as mymax, avg(price) from com.tedwon.esper.EsperQuickStartMainClass$OrderEvent.win:time(30 sec)";
+        String expression = "select Math.max(2, 3) as mymax, avg(price) from com.tedwon.esper.EsperQuickStartDemo$OrderEvent.win:time(30 sec)";
         EPStatement statement = epService.getEPAdministrator().createEPL(expression);
 
         /**
@@ -91,7 +96,7 @@ public class EsperQuickStartMainClass {
 
     public static void main(String[] args) {
 
-        EsperQuickStartMainClass startMainClass = new EsperQuickStartMainClass();
+        EsperQuickStartDemo startMainClass = new EsperQuickStartDemo();
 
         startMainClass.run();
     }

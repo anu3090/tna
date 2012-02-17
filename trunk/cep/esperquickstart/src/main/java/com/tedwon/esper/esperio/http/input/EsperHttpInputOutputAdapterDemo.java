@@ -19,7 +19,7 @@ import java.util.Properties;
  * @author <a href=mailto:iamtedwon@gmail.com">Ted Won</a>
  * @version 1.0
  */
-public class EsperHttpInputOutputAdapter {
+public class EsperHttpInputOutputAdapterDemo {
 
     private final static String ENGINE_URI = "CEP-SERVICE-0000";
 
@@ -119,7 +119,7 @@ public class EsperHttpInputOutputAdapter {
     }
 
     public static void main(String[] args) throws Exception {
-        EsperHttpInputOutputAdapter test = new EsperHttpInputOutputAdapter();
+        EsperHttpInputOutputAdapterDemo test = new EsperHttpInputOutputAdapterDemo();
         test.run();
     }
 }
