@@ -1,4 +1,4 @@
-package com.tedwon.esper.esperio.http;
+package com.tedwon.cep.http;
 
 import org.apache.http.impl.DefaultConnectionReuseStrategy;
 import org.apache.http.impl.DefaultHttpResponseFactory;

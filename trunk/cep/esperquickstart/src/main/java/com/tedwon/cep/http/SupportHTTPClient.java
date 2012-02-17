@@ -1,5 +1,4 @@
-package com.tedwon.esper.esperio.http;
-import com.espertech.esperio.http.core.URIUtil;
+package com.tedwon.cep.http;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
