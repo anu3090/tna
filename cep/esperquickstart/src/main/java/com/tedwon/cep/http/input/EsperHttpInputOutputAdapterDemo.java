@@ -17,7 +17,7 @@ import java.util.Properties;
 
 /**
  * Esper Quick Start Demo Class with HTTP Input/Output Adapter.
- *
+ * <p/>
  * <p/>See http://esper.codehaus.org/tutorials/tutorial/quickstart.html
  * <p/>See http://esper.codehaus.org/esperio-4.3.0/doc/reference/en/html/adapter_http.html
  * <p/>HTTP Request URI Sample: http://localhost:8079/sendevent?stream=MyFirewallEvent&name=Joe&changed=true
@@ -62,7 +62,7 @@ public class EsperHttpInputOutputAdapterDemo {
         Configuration config = new Configuration();
         config.addPluginLoader("EsperIOHTTPAdapter", EsperIOHTTPAdapterPlugin.class.getName(), new Properties(), esperIOHTTPConfig);
 
-        config.addEventTypeAutoName("com.tedwon.esper.event");
+        config.addEventTypeAutoName("com.tedwon.cep.event");
 
         /**
          * Create CEP Engine Instance
@@ -112,11 +112,15 @@ public class EsperHttpInputOutputAdapterDemo {
          * Destory CEP Engine Instance
          */
         epService.destroy();
-
     }
 
+    /**
+     * Sample EPL Statement Listener ==> Output Adapter
+     */
     public class MyListener implements UpdateListener {
+
         public void update(EventBean[] newEvents, EventBean[] oldEvents) {
+
             EventBean event = newEvents[0];
             System.out.println("ipAddress=" + event.get("ipAddress"));
             System.out.println("page=" + event.get("page"));
@@ -125,7 +129,9 @@ public class EsperHttpInputOutputAdapterDemo {
     }
 
     public static void main(String[] args) throws Exception {
-        EsperHttpInputOutputAdapterDemo test = new EsperHttpInputOutputAdapterDemo();
-        test.run();
+
+        EsperHttpInputOutputAdapterDemo startMainClass = new EsperHttpInputOutputAdapterDemo();
+
+        startMainClass.run();
     }
 }
