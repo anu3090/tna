@@ -1,4 +1,4 @@
-package com.tedwon.esper;
+package com.tedwon.cep;
 
 import com.espertech.esper.client.Configuration;
 import com.espertech.esper.client.EPServiceProvider;
