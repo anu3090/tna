@@ -6,7 +6,7 @@ package com.tedwon.cep.event;
  * <p/>See http://esper.codehaus.org/tutorials/tutorial/quickstart.html
  * <p/>See http://esper.codehaus.org/esperio-4.3.0/doc/reference/en/html/adapter_http.html
  *
- * @author <a href=mailto:tedd824@gmail.com">Ted Won</a>
+ * @author <a href=mailto:iamtedwon@gmail.com">Ted Won</a>
  * @version 1.0
  */
 public class AccessLogEvent {
