@@ -8,7 +8,8 @@ import com.espertech.esper.client.EventBean;
 import com.espertech.esper.client.UpdateListener;
 
 /**
- * Esper Quick Start Class.
+ * Esper Quick Start Demo Class.
+ *
  * <p/>See http://esper.codehaus.org/tutorials/tutorial/quickstart.html
  * <p/>See http://esper.codehaus.org/esperio-4.3.0/doc/reference/en/html/adapter_http.html
  * <p/>HTTP Request URI Sample: http://localhost:8079/sendevent?stream=MyFirewallEvent&name=Joe&changed=true
