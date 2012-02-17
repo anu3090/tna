@@ -1,4 +1,4 @@
-package nmon.pojo.statistics;
+package nmon.pojo.statistics.system;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,6 +20,22 @@ public class Top {
     private String minorFault;
     private String majorFault;
     private String command;
+
+
+    public Top(String pid, String cpu, String usr, String sys, String size, String resSet, String resText, String resData, String shdLib, String minorFault, String majorFault, String command) {
+        this.pid = pid;
+        this.cpu = cpu;
+        this.usr = usr;
+        this.sys = sys;
+        this.size = size;
+        this.resSet = resSet;
+        this.resText = resText;
+        this.resData = resData;
+        this.shdLib = shdLib;
+        this.minorFault = minorFault;
+        this.majorFault = majorFault;
+        this.command = command;
+    }
 
     public String getCommand() {
         return command;
@@ -115,5 +131,23 @@ public class Top {
 
     public void setUsr(String usr) {
         this.usr = usr;
+    }
+
+    @Override
+    public String toString() {
+        return "Top{" +
+                "command='" + command + '\'' +
+                ", pid='" + pid + '\'' +
+                ", cpu='" + cpu + '\'' +
+                ", usr='" + usr + '\'' +
+                ", sys='" + sys + '\'' +
+                ", size='" + size + '\'' +
+                ", resSet='" + resSet + '\'' +
+                ", resText='" + resText + '\'' +
+                ", resData='" + resData + '\'' +
+                ", shdLib='" + shdLib + '\'' +
+                ", minorFault='" + minorFault + '\'' +
+                ", majorFault='" + majorFault + '\'' +
+                '}';
     }
 }

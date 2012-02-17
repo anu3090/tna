@@ -27,6 +27,28 @@ public class ProcNetDev {
     private String transmitCarrier;
     private String transmitCompressed;
 
+    public ProcNetDev() {
+    }
+
+    public ProcNetDev(String receiveBytes, String receivePackets, String receiveErrs, String receiveDrops, String receiveFifo, String receiveFrame, String receiveCompressed, String receiveMulticast, String transmitBytes, String transmitPackets, String transmitErrs, String transmitDrop, String transmitFifo, String transmitColls, String transmitCarrier, String transmitCompressed) {
+        this.receiveBytes = receiveBytes;
+        this.receivePackets = receivePackets;
+        this.receiveErrs = receiveErrs;
+        this.receiveDrops = receiveDrops;
+        this.receiveFifo = receiveFifo;
+        this.receiveFrame = receiveFrame;
+        this.receiveCompressed = receiveCompressed;
+        this.receiveMulticast = receiveMulticast;
+        this.transmitBytes = transmitBytes;
+        this.transmitPackets = transmitPackets;
+        this.transmitErrs = transmitErrs;
+        this.transmitDrop = transmitDrop;
+        this.transmitFifo = transmitFifo;
+        this.transmitColls = transmitColls;
+        this.transmitCarrier = transmitCarrier;
+        this.transmitCompressed = transmitCompressed;
+    }
+
     public String getReceiveBytes() {
         return receiveBytes;
     }
@@ -161,5 +183,28 @@ public class ProcNetDev {
 
     public void setTransmitPackets(String transmitPackets) {
         this.transmitPackets = transmitPackets;
+    }
+
+    @Override
+    public String toString() {
+        return "ProcNetDev{" +
+                "face='" + face + '\'' +
+                ", receiveBytes='" + receiveBytes + '\'' +
+                ", receivePackets='" + receivePackets + '\'' +
+                ", receiveErrs='" + receiveErrs + '\'' +
+                ", receiveDrops='" + receiveDrops + '\'' +
+                ", receiveFifo='" + receiveFifo + '\'' +
+                ", receiveFrame='" + receiveFrame + '\'' +
+                ", receiveCompressed='" + receiveCompressed + '\'' +
+                ", receiveMulticast='" + receiveMulticast + '\'' +
+                ", transmitBytes='" + transmitBytes + '\'' +
+                ", transmitPackets='" + transmitPackets + '\'' +
+                ", transmitErrs='" + transmitErrs + '\'' +
+                ", transmitDrop='" + transmitDrop + '\'' +
+                ", transmitFifo='" + transmitFifo + '\'' +
+                ", transmitColls='" + transmitColls + '\'' +
+                ", transmitCarrier='" + transmitCarrier + '\'' +
+                ", transmitCompressed='" + transmitCompressed + '\'' +
+                '}';
     }
 }
