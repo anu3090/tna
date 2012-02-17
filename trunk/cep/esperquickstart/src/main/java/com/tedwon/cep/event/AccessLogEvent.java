@@ -1,4 +1,4 @@
-package com.tedwon.esper.event;
+package com.tedwon.cep.event;
 
 /**
  * Access Log Event Class.
