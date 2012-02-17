@@ -35,7 +35,10 @@ public class EsperQuickStartDemo {
         /**
          * Publish EPL Statement
          */
-        String expression = "select Math.max(2, 3) as mymax, avg(price) from com.tedwon.cep.esper.EsperQuickStartDemo$OrderEvent.win:time(30 sec)";
+        String expression = "select Math.max(2, 3) as mymax, itemName, avg(price) from com.tedwon.cep.esper.EsperQuickStartDemo$OrderEvent.win:time(30 sec)";
+//        String expression = "select Math.max(2, 3) as mymax, itemName, avg(price) from com.tedwon.cep.esper.EsperQuickStartDemo$OrderEvent.win:time(1 sec)";
+//        String expression = "select Math.max(2, 3) as mymax, itemName, avg(price) from com.tedwon.cep.esper.EsperQuickStartDemo$OrderEvent.win:length(2)";
+//        String expression = "select Math.max(2, 3) as mymax, itemName, avg(price) from com.tedwon.cep.esper.EsperQuickStartDemo$OrderEvent.win:length(1)";
         EPStatement statement = epService.getEPAdministrator().createEPL(expression);
 
         /**
@@ -47,8 +50,21 @@ public class EsperQuickStartDemo {
         /**
          * Send sample Event for TEST
          */
-        OrderEvent event = new OrderEvent("shirt", 74.50);
+        OrderEvent event = new OrderEvent("shirts", 1);
         epService.getEPRuntime().sendEvent(event);
+
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+
+        }
+
+        /**
+         * Send sample Event for TEST
+         */
+        OrderEvent event2 = new OrderEvent("pants", 3);
+        epService.getEPRuntime().sendEvent(event2);
 
         /**
          * Destory CEP Engine Instance
@@ -64,8 +80,11 @@ public class EsperQuickStartDemo {
         public void update(EventBean[] newEvents, EventBean[] oldEvents) {
 
             EventBean event = newEvents[0];
+            System.out.println();
+            System.out.println("itemName=" + event.get("itemName"));
             System.out.println("avg=" + event.get("avg(price)"));
             System.out.println("mymax=" + event.get("mymax"));
+            System.out.println();
         }
     }
 
