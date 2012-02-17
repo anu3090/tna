@@ -9,7 +9,7 @@ import com.espertech.esper.client.UpdateListener;
 
 /**
  * Esper Quick Start Demo Class.
- *
+ * <p/>
  * <p/>See http://esper.codehaus.org/tutorials/tutorial/quickstart.html
  * <p/>See http://esper.codehaus.org/esperio-4.3.0/doc/reference/en/html/adapter_http.html
  * <p/>HTTP Request URI Sample: http://localhost:8079/sendevent?stream=MyFirewallEvent&name=Joe&changed=true
@@ -20,7 +20,6 @@ import com.espertech.esper.client.UpdateListener;
 public class EsperQuickStartDemo {
 
     public void run() {
-
 
         /**
          * Configure CEP Engine Option
@@ -55,7 +54,6 @@ public class EsperQuickStartDemo {
          * Destory CEP Engine Instance
          */
         epService.destroy();
-
     }
 
     /**
