@@ -13,6 +13,9 @@ public class OrderEvent {
 
     private double price;
 
+    public OrderEvent() {
+    }
+
     public OrderEvent(String itemName, double price) {
         this.itemName = itemName;
         this.price = price;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -11,13 +11,21 @@
         </property>
     </bean>
 
-	<bean id="cepEngineRunner" class="com.cloudine.bigdata.cep.service.engine.CEPEngineRunner">
+    <bean id="cepEngineRunner" class="com.cloudine.bigdata.cep.service.engine.CEPEngineRunner">
         <property name="cepEngineID" value="${service.id}"/>
-	</bean>
-
-    <bean id="csvOutputAdapterManager" class="com.cloudine.bigdata.cep.service.adapter.output.csv.CSVOutputAdapterManager">
-         <property name="cepEngineID" value="${service.id}"/>
-         <property name="statementName" value="${statement.name}"/>
     </bean>
 
+    <bean id="csvOutputAdapterManager"
+          class="com.cloudine.bigdata.cep.service.adapter.output.csv.CSVOutputAdapterManager">
+        <property name="cepEngineID" value="${service.id}"/>
+        <property name="statementName" value="${statement.name}"/>
+    </bean>
+
+    <bean id="csvInputAdapterManager" class="com.cloudine.bigdata.cep.service.adapter.input.csv.CSVInputAdapterManager">
+        <property name="cepEngineID" value="${service.id}"/>
+        <property name="stream" value="${csv.input.adapter.stream}"/>
+        <property name="resource" value="${csv.input.adapter.resource}"/>
+        <property name="fieldNames" value="${csv.input.adapter.field.names}"/>
+        <property name="fieldTypes" value="${csv.input.adapter.field.types}"/>
+    </bean>
 </beans>

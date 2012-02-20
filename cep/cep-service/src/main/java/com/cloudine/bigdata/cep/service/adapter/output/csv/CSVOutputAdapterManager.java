@@ -17,7 +17,7 @@ import static org.springframework.util.Assert.notNull;
  * @author <a href=mailto:iamtedwon@gmail.com">Ted Won</a>
  * @version 1.0
  */
-public class CSVOutputAdapterManager {
+public class CSVOutputAdapterManager implements CSVOutputAdapterManagerMBean {
 
     /**
      * SLF4J Logging.
@@ -116,13 +116,6 @@ public class CSVOutputAdapterManager {
 
     private class CSVOutputAdapterUpdateListener implements UpdateListener {
 
-        private String[] propertyOrder;
-
-        public CSVOutputAdapterUpdateListener() {
-
-            propertyOrder = StringUtils.splitByWholeSeparatorPreserveAllTokens(fieldNames, ",");
-        }
-
         public void update(EventBean[] newEvents, EventBean[] oldEvent) {
 
             logger.debug("newEvents.length= {}", newEvents.length);
@@ -130,6 +123,14 @@ public class CSVOutputAdapterManager {
 
             for (int i = 0; i < newEvents.length; i++) {
                 logger.debug("Event Name: " + newEvents[i].getEventType().getName());
+
+                String[] propertyNames = newEvents[i].getEventType().getPropertyNames();
+
+
+
+                for(String propertyName : propertyNames) {
+                    System.out.println(propertyName + "=" + newEvents[i].get(propertyName));
+                }
 
             }
         }

@@ -1,5 +1,7 @@
 package com.cloudine.bigdata.cep.service;
 
+import com.cloudine.bigdata.cep.service.adapter.input.csv.CSVInputAdapterManagerMBean;
+import com.cloudine.bigdata.cep.service.adapter.output.csv.CSVOutputAdapterManagerMBean;
 import com.cloudine.bigdata.cep.service.engine.CEPEngineRunnerMBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,8 +29,21 @@ public class CEPServiceLauncher {
         });
 
         CEPEngineRunnerMBean cepEngineRunnerMBean = (CEPEngineRunnerMBean) applicationContext.getBean("cepEngineRunner");
+        CSVOutputAdapterManagerMBean csvOutputAdapterManagerMBean = (CSVOutputAdapterManagerMBean) applicationContext.getBean("csvOutputAdapterManager");
+        CSVInputAdapterManagerMBean csvInputAdapterManagerMBean = (CSVInputAdapterManagerMBean) applicationContext.getBean("csvInputAdapterManager");
 
         cepEngineRunnerMBean.start();
+
+        csvOutputAdapterManagerMBean.start();
+
+//        Thread.sleep(1000);
+
+        csvInputAdapterManagerMBean.start();
+
+
+        csvInputAdapterManagerMBean.stop();
+
+        csvOutputAdapterManagerMBean.stop();
 
         cepEngineRunnerMBean.stop();
 
