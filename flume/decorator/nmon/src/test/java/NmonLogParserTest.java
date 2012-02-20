@@ -6,7 +6,6 @@ import nmon.pojo.header.ProcNetDev;
 import nmon.pojo.statistics.*;
 import nmon.pojo.statistics.disk.Disk;
 import nmon.pojo.statistics.disk.DiskImpl;
-import nmon.pojo.statistics.network.NetIO;
 import nmon.pojo.statistics.network.Network;
 import nmon.pojo.statistics.network.NetworkImpl;
 import nmon.pojo.statistics.system.*;
