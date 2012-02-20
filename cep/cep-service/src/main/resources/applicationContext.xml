@@ -13,7 +13,11 @@
 
 	<bean id="cepEngineRunner" class="com.cloudine.bigdata.cep.service.engine.CEPEngineRunner">
         <property name="cepEngineID" value="${service.id}"/>
-
 	</bean>
+
+    <bean id="csvOutputAdapterManager" class="com.cloudine.bigdata.cep.service.adapter.output.csv.CSVOutputAdapterManager">
+         <property name="cepEngineID" value="${service.id}"/>
+         <property name="statementName" value="${statement.name}"/>
+    </bean>
 
 </beans>
