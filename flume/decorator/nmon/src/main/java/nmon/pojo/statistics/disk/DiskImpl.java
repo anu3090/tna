@@ -3,38 +3,39 @@ package nmon.pojo.statistics.disk;
 /**
  * Created by IntelliJ IDEA.
  * User: muda1120
- * Date: 12. 2. 17.
- * Time: PM 2:42
+ * Date: 12. 2. 20.
+ * Time: AM 11:29
  * To change this template use File | Settings | File Templates.
  */
-public class Xfer {
+public class DiskImpl implements Disk{
     private String diskName;
     private String value;
-
-    public Xfer(String diskName, String value) {
-        this.diskName = diskName;
-        this.value = value;
-    }
-
-    public String getDiskName() {
-        return diskName;
-    }
-
+    
+    
+    @Override
     public void setDiskName(String diskName) {
         this.diskName = diskName;
     }
 
-    public String getValue() {
-        return value;
+
+    @Override
+    public String getDiskName() {
+        return diskName;
     }
 
+    @Override
     public void setValue(String value) {
         this.value = value;
     }
 
     @Override
+    public String getValue() {
+        return value;
+    }
+
+    @Override
     public String toString() {
-        return "Busy{" +
+        return "DiskImpl{" +
                 "diskName='" + diskName + '\'' +
                 ", value='" + value + '\'' +
                 '}';

@@ -3,6 +3,7 @@ package nmon.pojo.statistics;
 import nmon.pojo.statistics.disk.*;
 import nmon.pojo.statistics.network.NetIO;
 import nmon.pojo.statistics.network.NetPacket;
+import nmon.pojo.statistics.network.Network;
 import nmon.pojo.statistics.system.*;
 
 import java.util.ArrayList;
@@ -26,59 +27,67 @@ public class ZZZZ {
 
     private List<Cpu> cpuList = new ArrayList<Cpu>();
     private List<Top> topList = new ArrayList<Top>();
-    private List<NetIO> netIOList = new ArrayList<NetIO>();
-    private List<NetPacket> netPacketList = new ArrayList<NetPacket>();
-    private List<Busy> diskBusyList = new ArrayList<Busy>();
-    private List<Read> diskReadList = new ArrayList<Read>();
-    private List<Write> diskWriteList = new ArrayList<Write>();
-    private List<Xfer> diskXferList = new ArrayList<Xfer>();
-    private List<Bsize> diskBsizeList = new ArrayList<Bsize>();
+    private List<Network> netIOList = new ArrayList<Network>();
+    private List<Network> netPacketList = new ArrayList<Network>();
+    private List<Disk> diskBusyList = new ArrayList<Disk>();
+    private List<Disk> diskReadList = new ArrayList<Disk>();
+    private List<Disk> diskWriteList = new ArrayList<Disk>();
+    private List<Disk> diskXferList = new ArrayList<Disk>();
+    private List<Disk> diskBsizeList = new ArrayList<Disk>();
 
-    public List<Busy> getDiskBusyList() {
+    public List<Disk> getDiskBsizeList() {
+        return diskBsizeList;
+    }
+
+    public void setDiskBsizeList(List<Disk> diskBsizeList) {
+        this.diskBsizeList = diskBsizeList;
+    }
+
+    public List<Disk> getDiskBusyList() {
         return diskBusyList;
     }
 
-    public void setDiskBusyList(List<Busy> diskBusyList) {
+    public void setDiskBusyList(List<Disk> diskBusyList) {
         this.diskBusyList = diskBusyList;
     }
 
-    public List<Read> getDiskReadList() {
+    public List<Disk> getDiskReadList() {
         return diskReadList;
     }
 
-    public void setDiskReadList(List<Read> diskReadList) {
+    public void setDiskReadList(List<Disk> diskReadList) {
         this.diskReadList = diskReadList;
     }
 
-    public List<Write> getDiskWriteList() {
+    public List<Disk> getDiskWriteList() {
         return diskWriteList;
     }
 
-    public void setDiskWriteList(List<Write> diskWriteList) {
+    public void setDiskWriteList(List<Disk> diskWriteList) {
         this.diskWriteList = diskWriteList;
     }
 
-    public List<Xfer> getDiskXferList() {
+    public List<Disk> getDiskXferList() {
         return diskXferList;
     }
 
-    public void setDiskXferList(List<Xfer> diskXferList) {
+    public void setDiskXferList(List<Disk> diskXferList) {
         this.diskXferList = diskXferList;
     }
 
-    public List<NetIO> getNetIOList() {
+    public List<Network> getNetIOList() {
         return netIOList;
     }
 
-    public void setNetIOList(List<NetIO> netIOList) {
+    public void setNetIOList(List<Network> netIOList) {
         this.netIOList = netIOList;
     }
 
-    public List<NetPacket> getNetPacketList() {
+    public List<Network> getNetPacketList() {
         return netPacketList;
     }
 
-    public void setNetPacketList(List<NetPacket> netPacketList) {
+    public void setNetPacketList(List<Network> netPacketList) {
         this.netPacketList = netPacketList;
     }
 
@@ -162,33 +171,56 @@ public class ZZZZ {
         topList.add(top);
     }
 
-    public void addNetIO(NetIO netIO){
+    public void addNetIO(Network netIO){
         netIOList.add(netIO);
     }
 
-    public void addNetPacket(NetPacket netPacket){
+    public void addNetPacket(Network netPacket){
         netPacketList.add(netPacket);
     }
 
-    public void addDiskBusy(Busy diskBusy){
+    public void addDiskBusy(Disk diskBusy){
         diskBusyList.add(diskBusy);
     }
 
-    public void addDiskRead(Read diskRead){
+    public void addDiskRead(Disk diskRead){
         diskReadList.add(diskRead);
     }
 
-    public void addDiskWrite(Write diskWrite){
+    public void addDiskWrite(Disk diskWrite){
         diskWriteList.add(diskWrite);
     }
 
-    public void addDiskXfer(Xfer diskXfer){
+    public void addDiskXfer(Disk diskXfer){
         diskXferList.add(diskXfer);
     }
 
-    public void addDiskBsize(Bsize diskBsize){
+    public void addDiskBsize(Disk diskBsize){
         diskBsizeList.add(diskBsize);
     }
 
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("ZZZZ");
+        sb.append("{key='").append(key).append('\'');
+        sb.append(", date='").append(date).append('\'');
+        sb.append(", time='").append(time).append('\'');
+        sb.append(", cpuAll=").append(cpuAll);
+        sb.append(", memory=").append(memory);
+        sb.append(", vm=").append(vm);
+        sb.append(", proc=").append(proc);
+        sb.append(", cpuList=").append(cpuList);
+        sb.append(", topList=").append(topList);
+        sb.append(", netIOList=").append(netIOList);
+        sb.append(", netPacketList=").append(netPacketList);
+        sb.append(", diskBusyList=").append(diskBusyList);
+        sb.append(", diskReadList=").append(diskReadList);
+        sb.append(", diskWriteList=").append(diskWriteList);
+        sb.append(", diskXferList=").append(diskXferList);
+        sb.append(", diskBsizeList=").append(diskBsizeList);
+        sb.append('}');
+        return sb.toString();
+    }
 }
