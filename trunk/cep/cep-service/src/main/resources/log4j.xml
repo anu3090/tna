@@ -15,7 +15,7 @@
       <level value="INFO"/>
    </logger>
 
-    <logger name="com.tedwon.esper">
+    <logger name="com.cloudine.bigdata.cep">
         <level value="DEBUG"/>
     </logger>
 
