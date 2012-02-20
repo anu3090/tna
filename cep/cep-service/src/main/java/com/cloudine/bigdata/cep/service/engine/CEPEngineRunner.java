@@ -7,6 +7,9 @@ import com.espertech.esper.client.EPServiceProviderManager;
 import com.espertech.esper.client.EPStatement;
 import com.espertech.esper.client.EventBean;
 import com.espertech.esper.client.UpdateListener;
+import com.espertech.esper.client.deploy.DeploymentResult;
+import com.espertech.esper.client.deploy.EPDeploymentAdmin;
+import com.espertech.esper.client.deploy.Module;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,6 +55,11 @@ public class CEPEngineRunner implements CEPEngineRunnerMBean {
 
     private EPServiceProvider cepServiceEngine;
 
+    /**
+     * Custom Esper Runtime Implementation.
+     */
+    private CEPEPRuntimeImpl runtimeImpl;
+
 
     public void start() throws Exception {
 
@@ -68,11 +76,15 @@ public class CEPEngineRunner implements CEPEngineRunnerMBean {
         cepServiceEngine = EPServiceProviderManager.getProvider(
                 cepEngineID, getEngineConfig());
 
-        /**
-         * Publish EPL Statement
-         */
-        String expression = "select Math.max(2, 3) as mymax, itemName, avg(price) from OrderEvent.win:time(30 sec)";
-        EPStatement statement = cepServiceEngine.getEPAdministrator().createEPL(expression);
+        // Obtain Runtime Object
+        runtimeImpl = (CEPEPRuntimeImpl) cepServiceEngine.getEPRuntime();
+
+        // Deploy EPL statements
+        deployEPLStatements();
+
+        cepServiceEngine.getEPAdministrator().startAllStatements();
+
+        EPStatement statement = cepServiceEngine.getEPAdministrator().getStatement("SampleEPL");
 
         /**
          * Subscribe EPL Statement Listener
@@ -85,6 +97,7 @@ public class CEPEngineRunner implements CEPEngineRunnerMBean {
          */
         OrderEvent event = new OrderEvent("shirts", 1);
         cepServiceEngine.getEPRuntime().sendEvent(event);
+
 
         state = "ACTIVE";
 
@@ -107,16 +120,35 @@ public class CEPEngineRunner implements CEPEngineRunnerMBean {
 
     /**
      * Configure CEP Engine Option.
+     *
      * @return Configuration
      */
     private Configuration getEngineConfig() {
 
         Configuration engineConfig = new Configuration();
 
+        // Custom Runtime Implementation
+        engineConfig.getEngineDefaults().getAlternativeContext().setRuntime("com.cloudine.bigdata.cep.service.engine.CEPEPRuntimeImpl");
+        engineConfig.getEngineDefaults().getAlternativeContext().setAdmin("com.cloudine.bigdata.cep.service.engine.CEPEPAdministratorImpl");
+
         engineConfig.addEventTypeAutoName("com.cloudine.bigdata.cep.service.event");
 
         return engineConfig;
     }
+
+    /**
+     * Deploy EPL statements.
+     *
+     * <p/>http://esper.codehaus.org/esper-4.5.0/doc/reference/en/html/epl_clauses.html#epl_createschema
+     */
+    private void deployEPLStatements() throws Exception {
+
+        EPDeploymentAdmin deploymentAdmin = cepServiceEngine.getEPAdministrator().getDeploymentAdmin();
+        Module module = deploymentAdmin.read("conf/statements.epl");
+        DeploymentResult deploymentResult = deploymentAdmin.deploy(module, null);
+        logger.info("[{}] Statements Deployment ID: {}", new Object[]{cepEngineID, deploymentResult});
+    }
+
 
     public String getCepEngineID() {
         return cepEngineID;
