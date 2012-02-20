@@ -6,7 +6,7 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>service.properties</value>
+                <value>conf/service.properties</value>
             </list>
         </property>
     </bean>
