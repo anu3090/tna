@@ -91,8 +91,8 @@ public class CEPEngineRunner implements CEPEngineRunnerMBean {
         /**
          * Subscribe EPL Statement Listener
          */
-        MyListener listener = new MyListener();
-        statement.addListener(listener);
+//        MyListener listener = new MyListener();
+//        statement.addListener(listener);
 
         /**
          * Send sample Event for TEST
