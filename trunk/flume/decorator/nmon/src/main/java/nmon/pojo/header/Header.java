@@ -14,26 +14,18 @@ public class Header {
     
 //    private AAA;
 //    private BBBP;
-    private Map<String,Integer> nicOrderMap = new HashMap<String, Integer>();
+    private Map<String, int[]> nicOrderMap = new HashMap<String, int[]>();
     private Map<String,Integer> diskOrderMap = new HashMap<String, Integer>();
 
-    public Map<String, Integer> getNicOrderMap() {
+    public Map<String, int[]> getNicOrderMap() {
         return nicOrderMap;
-    }
-
-    public void setNicOrderMap(Map<String, Integer> nicOrderMap) {
-        this.nicOrderMap = nicOrderMap;
     }
 
     public Map<String, Integer> getDiskOrderMap() {
         return diskOrderMap;
     }
 
-    public void setDiskOrderMap(Map<String, Integer> diskOrderMap) {
-        this.diskOrderMap = diskOrderMap;
-    }
-    
-    public void addNicOrd(String nicName, int ordIdx){
+    public void addNicOrd(String nicName, int[] ordIdx){
         nicOrderMap.put(nicName,ordIdx);
     }
 
