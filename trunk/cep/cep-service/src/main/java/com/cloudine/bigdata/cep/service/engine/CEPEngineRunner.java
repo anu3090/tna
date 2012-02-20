@@ -52,7 +52,9 @@ public class CEPEngineRunner implements CEPEngineRunnerMBean {
      */
     private long currentEngineTime = System.currentTimeMillis();
 
-
+    /**
+     * CEP Engine reference.
+     */
     private EPServiceProvider cepServiceEngine;
 
     /**
