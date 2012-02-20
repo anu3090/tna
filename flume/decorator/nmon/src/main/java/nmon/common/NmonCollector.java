@@ -1,112 +1,35 @@
-import nmon.common.NmonUtils;
+package nmon.common;
+
 import nmon.pojo.header.AAA;
 import nmon.pojo.header.BBBP;
 import nmon.pojo.header.Header;
 import nmon.pojo.header.ProcNetDev;
-import nmon.pojo.statistics.*;
+import nmon.pojo.statistics.ZZZZ;
 import nmon.pojo.statistics.disk.Disk;
 import nmon.pojo.statistics.disk.DiskImpl;
 import nmon.pojo.statistics.network.Network;
 import nmon.pojo.statistics.network.NetworkImpl;
 import nmon.pojo.statistics.system.*;
-import org.apache.commons.io.FileUtils;
-import org.junit.Ignore;
-import org.junit.Test;
 
-import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
+
 /**
  * Created by IntelliJ IDEA.
  * User: muda1120
- * Date: 12. 2. 10.
- * Time: AM 9:45
+ * Date: 12. 2. 20.
+ * Time: PM 3:11
  * To change this template use File | Settings | File Templates.
  */
-//@Ignore
-public class NmonLogParserTest {
-
+public class NmonCollector {
     static Header HEADER = new Header();
     static AAA AAA = new AAA();
     static BBBP BBBP = new BBBP();
-    static HashMap<String, Method> AAMethods = NmonUtils.extractVOMethods(AAA.getClass().getMethods(), "set");
-
-    @Test
-    public void lineSeperateTest() throws IOException, InterruptedException, InvocationTargetException, IllegalAccessException, InstantiationException {
-        File inputFile = FileUtils.getFile("/Users/muda1120/muda1120_120209_1607.nmon");
-//        File inputFile = FileUtils.getFile("/Users/muda1120/Downloads/LCNCAAS01_111124_1823.nmon");
-        InputStream input = FileUtils.openInputStream(inputFile);
-        InputStreamReader inputStreamReader = new InputStreamReader(input, "UTF-8");
-        BufferedReader reader = new BufferedReader(inputStreamReader);
-
-        String line = reader.readLine();
-        ZZZZ zzzz = null;
 
 
-        while (line != null) {
-            if (line.indexOf(",") == -1) return;
-            System.out.println(line);
-            // Validate Header
-            if ("AAA".equals(line.split(",")[0])) collectAAA(line);
-            if ("BBBP".equals(line.split(",")[0])) collectBBBP(line);
-            if (line.split(",")[1].contains("Network I/O")) collectNetworkOrd(line);
-            if (line.split(",")[1].contains("Disk Read")) collectDiskOrd(line);
-
-
-            // Validate Statistics
-            if ("ZZZZ".equals(line.split(",")[0])) {
-//                collectZZZZ(line);
-                while (line != null) {
-                    if ("ZZZZ".equals(line.split(",")[0])) {
-                        if(zzzz!=null) System.out.println(zzzz.toString());
-                        zzzz = collectZZZZ(line);
-                    }
-
-                    if (zzzz != null) {
-                        if (line.split(",")[0].contains("CPU") && !line.split(",")[0].equals("CPU_ALL"))
-                            zzzz.addCpu(collectCPU(line));
-                        if (line.split(",")[0].contains("CPU_ALL")) zzzz.setCpuAll(collectCPUALL(line));
-                        if (line.split(",")[0].contains("MEM")) zzzz.setMemory(collectMemory(line));
-                        if (line.split(",")[0].contains("VM")) zzzz.setVm(collectVM(line));
-                        if (line.split(",")[0].contains("TOP")) zzzz.addTop(collectTOP(line));
-                        if (line.split(",")[0].contains("PROC")) zzzz.setProc(collectProc(line));
-                        if (line.split(",")[0].contains("NET") &&
-                                !line.split(",")[1].contains("Network I/O")) zzzz.setNetIOList(collectNetworkIO(line));
-                        if (line.split(",")[0].contains("NETPACKET") &&
-                                !line.split(",")[1].contains("Network Packets"))
-                            zzzz.setNetIOList(collectNetworkIO(line));
-                        if (line.split(",")[0].contains("DISKBUSY") &&
-                                !line.split(",")[0].contains("Disk %Busy")) zzzz.setDiskBusyList(collectDisk(line));
-                        if (line.split(",")[0].contains("DISKREAD") &&
-                                !line.split(",")[0].contains("Disk Read")) zzzz.setDiskReadList(collectDisk(line));
-                        if (line.split(",")[0].contains("DISKWRITE") &&
-                                !line.split(",")[0].contains("Disk Write")) zzzz.setDiskWriteList(collectDisk(line));
-                        if (line.split(",")[0].contains("DISKXFER") &&
-                                !line.split(",")[0].contains("Disk transfers")) zzzz.setDiskXferList(collectDisk(line));
-                        if (line.split(",")[0].contains("DISKBSIZE") &&
-                                !line.split(",")[0].contains("Disk Block Size"))
-                            zzzz.setDiskBsizeList(collectDisk(line));
-
-                    }
-                    line = reader.readLine();
-                }
-
-            }
-//            System.out.println(line);
-            line = reader.readLine();
-        }
-        System.out.println(AAA);
-        System.out.println(BBBP);
-        System.out.println(HEADER);
-//        System.out.println(ZZZz);
-//        Thread.sleep(100000);
-
-
-    }
-
-    private List<Disk> collectDisk(String line) {
+    public static List<Disk> collectDisk(String line) {
         ArrayList<Disk> diskList = new ArrayList<Disk>();
         String[] values = line.split(",");
 
@@ -126,7 +49,7 @@ public class NmonLogParserTest {
         return diskList;
     }
 
-    private List<Network> collectNetworkIO(String value) {
+    public static List<Network> collectNetworkIO(String value) {
         List<Network> netIOList = new ArrayList<Network>();
         String[] values = value.split(",");
 
@@ -149,10 +72,10 @@ public class NmonLogParserTest {
 
         }
 
-        return netIOList; 
+        return netIOList;
     }
 
-    private void collectDiskOrd(String value) {
+    public static void collectDiskOrd(String value) {
         String[] values = value.split(",");
 
         for (int i = 2; i < values.length; i++) {
@@ -161,13 +84,13 @@ public class NmonLogParserTest {
         System.out.println(HEADER.getDiskOrderMap());
     }
 
-    private void collectNetworkOrd(String value) {
+    public static void collectNetworkOrd(String value) {
 //        Map<String, Integer[]> nicOrdMap = new HashMap<String, Integer[]>();
         Map<String, int[]> nicOrdMap = HEADER.getNicOrderMap();
         String[] values = value.split(",");
         String[] nicInfo;
         int[] nicReadAndWriteOrd = null;
-        
+
         for (int i = 0; i < values.length; i++) {
             if (values[i].contains("eth")){
                 nicReadAndWriteOrd = new int[2];
@@ -184,14 +107,14 @@ public class NmonLogParserTest {
 
     }
 
-    private Proc collectProc(String value) {
+    public static Proc collectProc(String value) {
         String[] values = value.split(",");
         Proc proc = new Proc(values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11]);
         //System.out.println(proc.toString());
         return proc;
     }
 
-    private Top collectTOP(String value) {
+    public static Top collectTOP(String value) {
         String[] values = value.split(",");
         Top top = new Top(values[1], values[3], values[4], values[5], values[6], values[7], values[8],
                 values[9], values[10], values[11], values[12], values[13]);
@@ -199,7 +122,7 @@ public class NmonLogParserTest {
         return top;
     }
 
-    private VM collectVM(String value) {
+    public static VM collectVM(String value) {
         String[] values = value.split(",");
         VM vm = new VM(values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[2], values[10]
                 , values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20]
@@ -210,7 +133,7 @@ public class NmonLogParserTest {
         return vm;
     }
 
-    private Memory collectMemory(String value) {
+    public static Memory collectMemory(String value) {
         String[] values = value.split(",");
         Memory memory = new Memory(values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[2], values[10]
                 , values[11], values[12], values[13], values[14], values[15]);
@@ -219,7 +142,7 @@ public class NmonLogParserTest {
         return memory;
     }
 
-    private CpuAll collectCPUALL(String value) {
+    public static CpuAll collectCPUALL(String value) {
         String[] values = value.split(",");
 
         CpuAll cpuAll = new CpuAll(values[2], values[3], values[4], values[5], values[6], values[7]);
@@ -228,7 +151,7 @@ public class NmonLogParserTest {
         return cpuAll;
     }
 
-    private Cpu collectCPU(String value) {
+    public static Cpu collectCPU(String value) {
         //CPU001,CPU 1 LCNCAAS01,User%,Sys%,Wait%,Idle%
         String[] values = value.split(",");
 
@@ -238,18 +161,29 @@ public class NmonLogParserTest {
         return cpu;
     }
 
-    private void collectAAA(String value) throws InvocationTargetException, IllegalAccessException, InstantiationException {
-        String[] aaaArray = value.split(",");
+    public static void collectAAA(String value){
+        String[] values = value.split(",");
 
-        if (aaaArray.length == 3) {
-            NmonUtils.stringInjectToPojo(AAMethods, AAA, NmonUtils.transformCamelName(aaaArray[1]), aaaArray[2]);
-        } else if (aaaArray.length > 3) {
-            NmonUtils.stringInjectToPojo(AAMethods, AAA, NmonUtils.transformCamelName(aaaArray[1]), aaaArray);
-        }
+        if("program".equals(values[1])) AAA.setProgname(values[2]);
+        if("command".equals(values[1])) AAA.setCommand(values[2]);
+        if("version".equals(values[1])) AAA.setVersion(values[2]);
+        if("disks_per_line".equals(values[1])) AAA.setDisksPerLine(values[2]);
+        if("disks".equals(values[1])) AAA.setDisks(values[2]);
+        if("host".equals(values[1])) AAA.setHost(values[2]);
+        if("user".equals(values[1])) AAA.setUser(values[2]);
+//        if("OS".equals(values[1])) AAA.setOS(values[2]);
+        if("runname".equals(values[1])) AAA.setRunname(values[2]);
+        if("time".equals(values[1])) AAA.setTime(values[2]);
+        if("date".equals(values[1])) AAA.setDate(values[2]);
+        if("interval".equals(values[1])) AAA.setInterval(values[2]);
+        if("snapshots".equals(values[1])) AAA.setSnapshots(values[2]);
+        if("cpus".equals(values[1])) AAA.setProgname(values[2]);
+        if("proc_stat_variables".equals(values[1])) AAA.setProgname(values[2]);
+
 
     }
 
-    private void collectBBBP(String value) {
+    public static void collectBBBP(String value) {
         /* BBBBP,1234,/proc/meminfo,"asdasd , "asdasd" */
         String[] values = value.split(",", 4);
 
@@ -295,7 +229,7 @@ public class NmonLogParserTest {
 
     }
 
-    private ZZZZ collectZZZZ(String value) {
+    public static ZZZZ collectZZZZ(String value) {
         String[] values = value.split(",");
         ZZZZ zzzz = new ZZZZ();
         zzzz.setKey(values[1]);
@@ -303,28 +237,5 @@ public class NmonLogParserTest {
         zzzz.setDate(values[3]);
 
         return zzzz;
-    }
-
-
-    @Test
-    public void replactionTest() {
-        String value = "max_disk_sasdasd_sada_ASd_ASD_asdasd";
-        System.out.println(NmonUtils.transformCamelName(value));
-    }
-
-    @Test
-    public void methodInvokeTest() throws InvocationTargetException, IllegalAccessException, InstantiationException {
-        String[] columes = {"DisksPerLine", "Program", "ProcStatVariables", "MaxDisks"};
-        String[] values = {"111", "222", "333", "444,1111"};
-
-        for (int i = 0; i < columes.length; i++) {
-            System.out.println(columes[i] + " : " + values[i]);
-            NmonUtils.stringInjectToPojo(AAMethods, AAA, columes[i], values[i]);
-        }
-
-        System.out.println(AAA.getDisksPerLine());
-        System.out.println(AAA.getMaxDisks());
-        System.out.println(AAA.getProcStatVariables());
-
     }
 }

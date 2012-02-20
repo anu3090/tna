@@ -1,8 +1,6 @@
 package nmon.pojo.statistics;
 
 import nmon.pojo.statistics.disk.*;
-import nmon.pojo.statistics.network.NetIO;
-import nmon.pojo.statistics.network.NetPacket;
 import nmon.pojo.statistics.network.Network;
 import nmon.pojo.statistics.system.*;
 

@@ -33,7 +33,6 @@ public class NmonUtils {
    		return mResult;
    	}
 
-
     public static String transformCamelName(String value) {
         StringBuilder sb = new StringBuilder();
         if(value.indexOf("_") != -1){
