@@ -1,17 +1,15 @@
 package com.cloudine.bigdata.cep.service.engine;
 
-import com.cloudine.bigdata.cep.service.event.OrderEvent;
 import com.espertech.esper.client.Configuration;
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
-import com.espertech.esper.client.EPStatement;
-import com.espertech.esper.client.EventBean;
-import com.espertech.esper.client.UpdateListener;
 import com.espertech.esper.client.deploy.DeploymentResult;
 import com.espertech.esper.client.deploy.EPDeploymentAdmin;
 import com.espertech.esper.client.deploy.Module;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static com.cloudine.bigdata.cep.service.utils.Assert.notNull;
 
 
 /**
@@ -86,21 +84,6 @@ public class CEPEngineRunnerImpl implements CEPEngineRunner {
 
         cepServiceEngine.getEPAdministrator().startAllStatements();
 
-        EPStatement statement = cepServiceEngine.getEPAdministrator().getStatement("SampleEPL");
-
-        /**
-         * Subscribe EPL Statement Listener
-         */
-//        MyListener listener = new MyListener();
-//        statement.addListener(listener);
-
-        /**
-         * Send sample Event for TEST
-         */
-        OrderEvent event = new OrderEvent("shirts", 1);
-        cepServiceEngine.getEPRuntime().sendEvent(event);
-
-
         state = "ACTIVE";
 
         logger.info("[{}] CEP Engine Runner is started successfully.", cepEngineID);
@@ -140,13 +123,18 @@ public class CEPEngineRunnerImpl implements CEPEngineRunner {
 
     /**
      * Deploy EPL statements.
-     *
+     * <p/>
      * <p/>http://esper.codehaus.org/esper-4.5.0/doc/reference/en/html/epl_clauses.html#epl_createschema
      */
     private void deployEPLStatements() throws Exception {
 
         EPDeploymentAdmin deploymentAdmin = cepServiceEngine.getEPAdministrator().getDeploymentAdmin();
         Module module = deploymentAdmin.read("conf/statements.epl");
+        String uri = module.getUri();
+        String moduleText = module.getModuleText();
+
+        notNull(moduleText, "There is no EPL Statement for " + uri);
+
         DeploymentResult deploymentResult = deploymentAdmin.deploy(module, null);
         logger.info("[{}] Statements Deployment ID: {}", new Object[]{cepEngineID, deploymentResult});
     }
@@ -183,21 +171,4 @@ public class CEPEngineRunnerImpl implements CEPEngineRunner {
     public void setCurrentEngineTime(long currentEngineTime) {
         this.currentEngineTime = currentEngineTime;
     }
-
-    /**
-     * Sample EPL Statement Listener ==> Output Adapter
-     */
-    public class MyListener implements UpdateListener {
-
-        public void update(EventBean[] newEvents, EventBean[] oldEvents) {
-
-            EventBean event = newEvents[0];
-            System.out.println();
-            System.out.println("itemName=" + event.get("itemName"));
-            System.out.println("avg=" + event.get("avg(price)"));
-            System.out.println("mymax=" + event.get("mymax"));
-            System.out.println();
-        }
-    }
-
 }

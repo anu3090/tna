@@ -1,4 +1,4 @@
 module statements.epl;
 
 @Name('SampleEPL')
-select Math.max(2, 3) as mymax, itemName, avg(price) from OrderEvent.win:time(30 sec);
+select * from OrderEvent.win:time(30 sec) where price > 0;

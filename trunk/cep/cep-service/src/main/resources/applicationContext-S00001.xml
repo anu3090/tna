@@ -46,7 +46,7 @@
 
     <util:list id="inputAdapterList-S00001" list-class="java.util.LinkedList"
                value-type="com.cloudine.bigdata.cep.service.adapter.AbstractAdapterManagerImpl">
-        <ref bean="csvInputAdapterManager-${service.id}-00"/>
+        <!--<ref bean="csvInputAdapterManager-${service.id}-00"/>-->
         <ref bean="httpInputAdapterManager-${service.id}-00"/>
     </util:list>
 

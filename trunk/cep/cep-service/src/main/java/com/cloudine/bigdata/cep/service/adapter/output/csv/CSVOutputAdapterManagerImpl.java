@@ -8,7 +8,7 @@ import com.espertech.esper.client.UpdateListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.springframework.util.Assert.notNull;
+import static com.cloudine.bigdata.cep.service.utils.Assert.notNull;
 
 /**
  * CSV Output Adapter Manager Class.
@@ -89,13 +89,14 @@ public class CSVOutputAdapterManagerImpl extends AbstractAdapterManagerImpl {
             logger.debug("newEvents.length= {}", newEvents.length);
             logger.debug("oldEvent.length= {}", oldEvent != null ? oldEvent.length : null);
 
+
             for (int i = 0; i < newEvents.length; i++) {
 
                 logger.debug("Event Name: " + newEvents[i].getEventType().getName());
 
                 String[] propertyNames = newEvents[i].getEventType().getPropertyNames();
 
-                for(String propertyName : propertyNames) {
+                for (String propertyName : propertyNames) {
                     System.out.println(propertyName + "=" + newEvents[i].get(propertyName));
                 }
             }
