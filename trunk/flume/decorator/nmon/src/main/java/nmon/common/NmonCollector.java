@@ -25,9 +25,101 @@ import java.util.*;
  */
 public class NmonCollector {
     static Header HEADER = new Header();
-    static AAA AAA = new AAA();
-    static BBBP BBBP = new BBBP();
+    static AAA AAA = null;
+    static BBBP BBBP = null;
 
+    public static Header getHEADER() {
+        return HEADER;
+    }
+
+    public static AAA getAAA() {
+        return AAA;
+    }
+
+    public static BBBP getBBBP() {
+        return BBBP;
+    }
+
+    public static void collectAAA(String value){
+        if(AAA==null) AAA = new AAA();
+
+        String[] values = value.split(",");
+
+        if("program".equals(values[1])) AAA.setProgname(values[2]);
+        if("command".equals(values[1])) AAA.setCommand(values[2]);
+        if("version".equals(values[1])) AAA.setVersion(values[2]);
+        if("max_disks".equals(values[1])) AAA.setProcStatVariables(values[2]);
+        if("disks_per_line".equals(values[1])) AAA.setDisksPerLine(values[2]);
+        if("disks".equals(values[1])) AAA.setDisks(values[2]);
+        if("host".equals(values[1])) AAA.setHost(values[2]);
+        if("user".equals(values[1])) AAA.setUser(values[2]);
+        if("OS".equals(values[1])) AAA.setOS(values[2]);
+        if("runname".equals(values[1])) AAA.setRunname(values[2]);
+        if("time".equals(values[1])) AAA.setTime(values[2]);
+        if("date".equals(values[1])) AAA.setDate(values[2]);
+        if("interval".equals(values[1])) AAA.setInterval(values[2]);
+        if("snapshots".equals(values[1])) AAA.setSnapshots(values[2]);
+        if("cpus".equals(values[1])) AAA.setCpus(values[2]);
+        if("proc_stat_variables".equals(values[1])) AAA.setProcStatVariables(values[2]);
+
+    }
+
+    public static void collectBBBP(String value) {
+        if(BBBP==null) BBBP = new BBBP();
+
+        String[] values = value.split(",", 4);
+
+
+        if (NmonUtils.BBBP_PROCNETDEV.equals(values[2]) && values.length > 3) {
+            if (values[3].contains("eth")) {
+                ProcNetDev procNetDev = new ProcNetDev();
+
+                if (values[3].replaceAll("\"", "").split(":").length < 2) return;
+
+                String nicFace = values[3].replaceAll("\"", "").split(":")[0].replaceAll(" ", "");
+
+                String[] nicTempInfo = values[3].replaceAll("\"", "").split(":")[1].split(" ");
+                List<String> nicInfo = new ArrayList<String>();
+
+                for (String nic : nicTempInfo) {
+                    if (!nic.equals("")) nicInfo.add(nic);
+                }
+
+
+                if (nicInfo.size() == 16) {
+                    procNetDev.setFace(nicFace);
+                    procNetDev.setReceiveBytes(nicInfo.get(0));
+                    procNetDev.setReceivePackets(nicInfo.get(1));
+                    procNetDev.setReceiveErrs(nicInfo.get(2));
+                    procNetDev.setReceiveDrops(nicInfo.get(3));
+                    procNetDev.setReceiveFifo(nicInfo.get(4));
+                    procNetDev.setReceiveFrame(nicInfo.get(5));
+                    procNetDev.setReceiveCompressed(nicInfo.get(6));
+                    procNetDev.setReceiveMulticast(nicInfo.get(7));
+                    procNetDev.setTransmitBytes(nicInfo.get(8));
+                    procNetDev.setTransmitPackets(nicInfo.get(9));
+                    procNetDev.setTransmitErrs(nicInfo.get(10));
+                    procNetDev.setTransmitDrop(nicInfo.get(11));
+                    procNetDev.setTransmitFifo(nicInfo.get(12));
+                    procNetDev.setTransmitColls(nicInfo.get(13));
+                    procNetDev.setTransmitCarrier(nicInfo.get(14));
+                    procNetDev.setTransmitCompressed(nicInfo.get(15));
+                    BBBP.setProcNetDev(procNetDev);
+                }
+            }
+        }
+
+    }
+
+    public static ZZZZ collectZZZZ(String value) {
+        String[] values = value.split(",");
+        ZZZZ zzzz = new ZZZZ();
+        zzzz.setKey(values[1]);
+        zzzz.setTime(values[2]);
+        zzzz.setDate(values[3]);
+
+        return zzzz;
+    }
 
     public static List<Disk> collectDisk(String line) {
         ArrayList<Disk> diskList = new ArrayList<Disk>();
@@ -85,7 +177,8 @@ public class NmonCollector {
     }
 
     public static void collectNetworkOrd(String value) {
-//        Map<String, Integer[]> nicOrdMap = new HashMap<String, Integer[]>();
+
+
         Map<String, int[]> nicOrdMap = HEADER.getNicOrderMap();
         String[] values = value.split(",");
         String[] nicInfo;
@@ -159,83 +252,5 @@ public class NmonCollector {
 //        System.out.println(cpu.toString());
 
         return cpu;
-    }
-
-    public static void collectAAA(String value){
-        String[] values = value.split(",");
-
-        if("program".equals(values[1])) AAA.setProgname(values[2]);
-        if("command".equals(values[1])) AAA.setCommand(values[2]);
-        if("version".equals(values[1])) AAA.setVersion(values[2]);
-        if("disks_per_line".equals(values[1])) AAA.setDisksPerLine(values[2]);
-        if("disks".equals(values[1])) AAA.setDisks(values[2]);
-        if("host".equals(values[1])) AAA.setHost(values[2]);
-        if("user".equals(values[1])) AAA.setUser(values[2]);
-//        if("OS".equals(values[1])) AAA.setOS(values[2]);
-        if("runname".equals(values[1])) AAA.setRunname(values[2]);
-        if("time".equals(values[1])) AAA.setTime(values[2]);
-        if("date".equals(values[1])) AAA.setDate(values[2]);
-        if("interval".equals(values[1])) AAA.setInterval(values[2]);
-        if("snapshots".equals(values[1])) AAA.setSnapshots(values[2]);
-        if("cpus".equals(values[1])) AAA.setProgname(values[2]);
-        if("proc_stat_variables".equals(values[1])) AAA.setProgname(values[2]);
-
-
-    }
-
-    public static void collectBBBP(String value) {
-        /* BBBBP,1234,/proc/meminfo,"asdasd , "asdasd" */
-        String[] values = value.split(",", 4);
-
-
-        if (NmonUtils.BBBP_PROCNETDEV.equals(values[2]) && values.length > 3) {
-            if (values[3].contains("eth")) {
-                ProcNetDev procNetDev = new ProcNetDev();
-
-                if (values[3].replaceAll("\"", "").split(":").length < 2) return;
-
-                String nicFace = values[3].replaceAll("\"", "").split(":")[0].replaceAll(" ", "");
-
-                String[] nicTempInfo = values[3].replaceAll("\"", "").split(":")[1].split(" ");
-                List<String> nicInfo = new ArrayList<String>();
-
-                for (String nic : nicTempInfo) {
-                    if (!nic.equals("")) nicInfo.add(nic);
-                }
-
-
-                if (nicInfo.size() == 16) {
-                    procNetDev.setFace(nicFace);
-                    procNetDev.setReceiveBytes(nicInfo.get(0));
-                    procNetDev.setReceivePackets(nicInfo.get(1));
-                    procNetDev.setReceiveErrs(nicInfo.get(2));
-                    procNetDev.setReceiveDrops(nicInfo.get(3));
-                    procNetDev.setReceiveFifo(nicInfo.get(4));
-                    procNetDev.setReceiveFrame(nicInfo.get(5));
-                    procNetDev.setReceiveCompressed(nicInfo.get(6));
-                    procNetDev.setReceiveMulticast(nicInfo.get(7));
-                    procNetDev.setTransmitBytes(nicInfo.get(8));
-                    procNetDev.setTransmitPackets(nicInfo.get(9));
-                    procNetDev.setTransmitErrs(nicInfo.get(10));
-                    procNetDev.setTransmitDrop(nicInfo.get(11));
-                    procNetDev.setTransmitFifo(nicInfo.get(12));
-                    procNetDev.setTransmitColls(nicInfo.get(13));
-                    procNetDev.setTransmitCarrier(nicInfo.get(14));
-                    procNetDev.setTransmitCompressed(nicInfo.get(15));
-                    BBBP.setProcNetDev(procNetDev);
-                }
-            }
-        }
-
-    }
-
-    public static ZZZZ collectZZZZ(String value) {
-        String[] values = value.split(",");
-        ZZZZ zzzz = new ZZZZ();
-        zzzz.setKey(values[1]);
-        zzzz.setTime(values[2]);
-        zzzz.setDate(values[3]);
-
-        return zzzz;
     }
 }
