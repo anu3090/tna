@@ -7,6 +7,9 @@
     <groupId>com.cloudine.bigdata.cep</groupId>
     <artifactId>cep-commons</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <name>CEP Service Commons</name>
+    <url>http://muda1120.cafe24.com</url>
+    <inceptionYear>2012</inceptionYear>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
