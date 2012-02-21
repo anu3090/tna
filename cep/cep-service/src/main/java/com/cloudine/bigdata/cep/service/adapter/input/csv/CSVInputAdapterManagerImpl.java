@@ -49,18 +49,21 @@ public class CSVInputAdapterManagerImpl extends AbstractAdapterManagerImpl {
         logger.info("[{}] CSV Input Adapter Starting..................", cepEngineID);
 
         try {
+
             cepServiceEngine = EPServiceProviderManager.getProvider(cepEngineID);
 
-//            spec = new CSVInputAdapterSpec(new AdapterInputSource(new File(resource)), stream);
-//            String[] propertyOrder = StringUtils.splitByWholeSeparatorPreserveAllTokens(fieldNames, ",");
-//            spec.setPropertyOrder(propertyOrder);
+            spec = new CSVInputAdapterSpec(new AdapterInputSource(new File(resource)), stream);
+            String[] propertyOrder = StringUtils.splitByWholeSeparatorPreserveAllTokens(fieldNames, ",");
+            spec.setPropertyOrder(propertyOrder);
 //            spec.setPropertyTypes(this.getEventTypesMap(fieldNames, fieldTypes));
-//            spec.setEventsPerSec(1);
-//            spec.setLooping(true);
-//            // Set to true to use the engine timer thread for the work, or false to use the current thread.
-//            spec.setUsingEngineThread(true);
+            spec.setEventsPerSec(1);
+            spec.setLooping(true);
+            // Set to true to use the engine timer thread for the work, or false to use the current thread.
+            spec.setUsingEngineThread(true);
 
-            inputAdapter = new CSVInputAdapter(cepServiceEngine, new AdapterInputSource(new File(resource)), stream);
+            inputAdapter = new CSVInputAdapter(cepServiceEngine, spec);
+//            inputAdapter = new CSVInputAdapter(cepServiceEngine, new AdapterInputSource(new File(resource)), stream);
+
 
             inputAdapter.start();
 
