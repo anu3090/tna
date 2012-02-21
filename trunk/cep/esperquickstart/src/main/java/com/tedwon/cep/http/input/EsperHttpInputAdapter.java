@@ -28,14 +28,18 @@ public class EsperHttpInputAdapter {
         boolean isNio = true;
 
         String esperIOHTTPConfig = "<esperio-http-configuration>\n" +
-                "<service name=\"service1\" port=\"" + port + "\" nio=\"" + isNio + "\"/>" +
-                "<get service=\"service1\" pattern=\"*\"/>" +
+                "\t<service name=\"service1\" port=\"" + port + "\" nio=\"" + isNio + "\"/>\n" +
+                "\t<get service=\"service1\" pattern=\"*\"/>\n" +
                 "</esperio-http-configuration>";
+
+        System.out.println();
+        System.out.println(esperIOHTTPConfig);
+        System.out.println();
 
         Configuration config = new Configuration();
         config.addPluginLoader("EsperIOHTTPAdapter", EsperIOHTTPAdapterPlugin.class.getName(), new Properties(), esperIOHTTPConfig);
 
-        config.addEventTypeAutoName("com.tedwon.esper.event");
+        config.addEventTypeAutoName("com.tedwon.cep.event");
         EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider(config);
         String expression = "select date from AccessLogEvent.win:time(30 sec)";
         EPStatement statement = epService.getEPAdministrator().createEPL(expression);
