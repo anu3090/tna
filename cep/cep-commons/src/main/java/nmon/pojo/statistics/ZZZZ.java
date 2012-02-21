@@ -1,8 +1,8 @@
-package com.cloudine.bigdata.cep.service.pojo.nmon.statistics;
+package nmon.pojo.statistics;
 
-import com.cloudine.bigdata.cep.service.pojo.nmon.statistics.system.*;
-import com.cloudine.bigdata.cep.service.pojo.nmon.statistics.disk.Disk;
-import com.cloudine.bigdata.cep.service.pojo.nmon.statistics.network.Network;
+import nmon.pojo.statistics.system.*;
+import nmon.pojo.statistics.disk.Disk;
+import nmon.pojo.statistics.network.Network;
 
 import java.io.Serializable;
 import java.util.ArrayList;

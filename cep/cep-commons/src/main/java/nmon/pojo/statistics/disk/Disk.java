@@ -1,4 +1,4 @@
-package com.cloudine.bigdata.cep.service.pojo.nmon.statistics.disk;
+package nmon.pojo.statistics.disk;
 
 /**
  * Created by IntelliJ IDEA.

@@ -1,5 +1,7 @@
-package com.cloudine.bigdata.cep.service.pojo.nmon.header;
+package nmon.pojo.header;
 
+
+import java.io.Serializable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -8,7 +10,7 @@ package com.cloudine.bigdata.cep.service.pojo.nmon.header;
  * Time: PM 4:07
  * To change this template use File | Settings | File Templates.
  */
-public class AAA {
+public class AAA  implements Serializable {
 
     private String host;
     private String interval;

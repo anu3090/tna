@@ -1,5 +1,6 @@
-package com.cloudine.bigdata.cep.service.pojo.nmon.header;
+package nmon.pojo.header;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Time: PM 4:28
  * To change this template use File | Settings | File Templates.
  */
-public class BBBP {
+public class BBBP  implements Serializable {
 
     private List<ProcNetDev> procNetDevList = new ArrayList<ProcNetDev>();
 

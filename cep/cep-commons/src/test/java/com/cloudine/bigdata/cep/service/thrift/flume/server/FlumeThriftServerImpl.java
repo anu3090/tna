@@ -1,6 +1,6 @@
 package com.cloudine.bigdata.cep.service.thrift.flume.server;
 
-import com.cloudine.bigdata.cep.service.pojo.nmon.statistics.ZZZZ;
+import nmon.pojo.NmonStatistics;
 import com.cloudine.bigdata.cep.service.thrift.flume.ThriftFlumeEvent;
 import com.cloudine.bigdata.cep.service.thrift.flume.ThriftFlumeEventServer;
 import org.apache.thrift.TException;
@@ -18,25 +18,31 @@ import java.io.ObjectInputStream;
  * To change this template use File | Settings | File Templates.
  */
 public class FlumeThriftServerImpl implements ThriftFlumeEventServer.Iface{
-    long inputCnt = 0;
+
+
     @Override
     public void append(ThriftFlumeEvent evt) throws TException {
-        inputCnt++;
 
         ByteArrayInputStream bis = new ByteArrayInputStream(evt.getBody());
         ObjectInput in = null;
-        ZZZZ o = null;
+        NmonStatistics statistics = null;
         try {
             in = new ObjectInputStream(bis);
-            o = (ZZZZ)in.readObject();
-
+            statistics = (NmonStatistics)in.readObject();
+            System.out.println(statistics.toString()+"\r");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
+        }finally {
+            try {
+                if(bis!=null) bis.close();
+                if (in != null) in.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        System.out.println(o.toString()+"\r");
-        //System.out.println("Input Count dddd-pasdasdpp : "+inputCnt+" - Event Priority ["+evt.getPriority()+"] - "+new String(evt.getBody()));
     }
 
     @Override

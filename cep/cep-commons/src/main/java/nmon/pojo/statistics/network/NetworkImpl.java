@@ -1,4 +1,4 @@
-package com.cloudine.bigdata.cep.service.pojo.nmon.statistics.network;
+package nmon.pojo.statistics.network;
 
 import java.io.Serializable;
 
