@@ -53,7 +53,12 @@ public class NmonDecorator<S extends EventSink> extends EventSinkDecorator<S> {
 //        // Validate Statistics
         if ("ZZZZ".equals(line.split(",")[0])) {
             if (zzzz != null) {
-                EventImpl eventImpl = new EventImpl(zzzz.toString().getBytes(),
+                StringBuilder sb = new StringBuilder();
+                sb.append(NmonCollector.getAAA().toString());
+                sb.append(NmonCollector.getBBBP().toString());
+                sb.append(zzzz.toString());
+
+                EventImpl eventImpl = new EventImpl(sb.toString().getBytes(),
                         event.getTimestamp(), event.getPriority(), event.getNanos(), event.getHost(),
                         event.getAttrs());
 

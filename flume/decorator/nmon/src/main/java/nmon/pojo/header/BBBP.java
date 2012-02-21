@@ -30,4 +30,13 @@ public class BBBP {
     public int getProdNetDevListSize(){
         return procNetDevList.size();
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("BBBP");
+        sb.append("{procNetDevList=").append(procNetDevList);
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -25,7 +25,7 @@ import java.util.*;
  * Time: AM 9:45
  * To change this template use File | Settings | File Templates.
  */
-//@Ignore
+@Ignore
 public class NmonLogParserTest {
 
     static Header HEADER = new Header();

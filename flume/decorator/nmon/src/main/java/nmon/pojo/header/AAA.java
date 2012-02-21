@@ -25,8 +25,8 @@ public class AAA {
     private String runname;
     private String procStatVariables;
     private String cpus;
-    private List<String> OS;
-    private List<String> maxDisks;
+    private String OS;
+    private String maxDisks;
 
     public String getCpus() {
         return cpus;
@@ -84,19 +84,19 @@ public class AAA {
         this.interval = interval;
     }
 
-    public List<String> getMaxDisks() {
+    public String getMaxDisks() {
         return maxDisks;
     }
 
-    public void setMaxDisks(List<String> maxDisks) {
+    public void setMaxDisks(String maxDisks) {
         this.maxDisks = maxDisks;
     }
 
-    public List<String> getOS() {
+    public String getOS() {
         return OS;
     }
 
-    public void setOS(List<String> OS) {
+    public void setOS(String OS) {
         this.OS = OS;
     }
 
@@ -156,4 +156,27 @@ public class AAA {
         this.progname = progname;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("AAA");
+        sb.append("{host='").append(host).append('\'');
+        sb.append(", interval='").append(interval).append('\'');
+        sb.append(", progname='").append(progname).append('\'');
+        sb.append(", date='").append(date).append('\'');
+        sb.append(", disks='").append(disks).append('\'');
+        sb.append(", version='").append(version).append('\'');
+        sb.append(", time='").append(time).append('\'');
+        sb.append(", command='").append(command).append('\'');
+        sb.append(", disksPerLine='").append(disksPerLine).append('\'');
+        sb.append(", snapshots='").append(snapshots).append('\'');
+        sb.append(", user='").append(user).append('\'');
+        sb.append(", runname='").append(runname).append('\'');
+        sb.append(", procStatVariables='").append(procStatVariables).append('\'');
+        sb.append(", cpus='").append(cpus).append('\'');
+        sb.append(", OS='").append(OS).append('\'');
+        sb.append(", maxDisks='").append(maxDisks).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
