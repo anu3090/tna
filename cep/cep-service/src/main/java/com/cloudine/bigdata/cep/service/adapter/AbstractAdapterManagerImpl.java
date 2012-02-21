@@ -1,6 +1,5 @@
 package com.cloudine.bigdata.cep.service.adapter;
 
-import com.cloudine.bigdata.cep.service.adapter.input.csv.CSVInputAdapterManager;
 import com.espertech.esper.client.EPServiceProvider;
 
 /**
@@ -9,7 +8,7 @@ import com.espertech.esper.client.EPServiceProvider;
  * @author <a href=mailto:iamtedwon@gmail.com">Ted Won</a>
  * @version 1.0
  */
-public class AbstractAdapterManager implements CSVInputAdapterManager {
+public class AbstractAdapterManagerImpl implements AdapterManager {
 
     protected String cepEngineID;
 
