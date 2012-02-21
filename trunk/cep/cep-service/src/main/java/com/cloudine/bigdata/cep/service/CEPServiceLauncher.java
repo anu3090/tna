@@ -1,12 +1,12 @@
 package com.cloudine.bigdata.cep.service;
 
-import com.cloudine.bigdata.cep.service.adapter.input.csv.CSVInputAdapterManagerMBean;
-import com.cloudine.bigdata.cep.service.adapter.output.csv.CSVOutputAdapterManagerMBean;
-import com.cloudine.bigdata.cep.service.engine.CEPEngineRunnerMBean;
+import com.cloudine.bigdata.cep.service.runtime.CEPServiceApplicationRuntime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.Set;
 
 /**
  * CEP Service Launcher Class.
@@ -28,24 +28,18 @@ public class CEPServiceLauncher {
                 "classpath:applicationContext.xml"
         });
 
-        CEPEngineRunnerMBean cepEngineRunnerMBean = (CEPEngineRunnerMBean) applicationContext.getBean("cepEngineRunner");
-        CSVOutputAdapterManagerMBean csvOutputAdapterManagerMBean = (CSVOutputAdapterManagerMBean) applicationContext.getBean("csvOutputAdapterManager");
-        CSVInputAdapterManagerMBean csvInputAdapterManagerMBean = (CSVInputAdapterManagerMBean) applicationContext.getBean("csvInputAdapterManager");
 
-        cepEngineRunnerMBean.start();
+        Set<CEPServiceApplicationRuntime> cepServiceSet = (Set<CEPServiceApplicationRuntime>) applicationContext.getBean("cepServiceSet");
 
-        csvOutputAdapterManagerMBean.start();
+        System.out.println(cepServiceSet);
 
-//        Thread.sleep(1000);
+        for (CEPServiceApplicationRuntime cepService : cepServiceSet) {
+            cepService.start();
+        }
 
-        csvInputAdapterManagerMBean.start();
-
-
-        csvInputAdapterManagerMBean.stop();
-
-        csvOutputAdapterManagerMBean.stop();
-
-        cepEngineRunnerMBean.stop();
+        for (CEPServiceApplicationRuntime cepService : cepServiceSet) {
+            cepService.stop();
+        }
 
 //        applicationContext.registerShutdownHook();
 
@@ -53,5 +47,6 @@ public class CEPServiceLauncher {
 //        synchronized (CEPServiceLauncher.class) {
 //            CEPServiceLauncher.class.wait();
 //        }
+
     }
 }
