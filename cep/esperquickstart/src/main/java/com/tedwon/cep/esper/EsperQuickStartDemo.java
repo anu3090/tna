@@ -95,6 +95,7 @@ public class EsperQuickStartDemo {
     public class OrderEvent {
 
         private String itemName;
+
         private double price;
 
         public OrderEvent(String itemName, double price) {
@@ -106,8 +107,24 @@ public class EsperQuickStartDemo {
             return itemName;
         }
 
+        public void setItemName(String itemName) {
+            this.itemName = itemName;
+        }
+
         public double getPrice() {
             return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
+
+        @Override
+        public String toString() {
+            return "OrderEvent{" +
+                    "itemName='" + itemName + '\'' +
+                    ", price=" + price +
+                    '}';
         }
     }
 
