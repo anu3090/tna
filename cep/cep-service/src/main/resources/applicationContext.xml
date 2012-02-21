@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <context:annotation-config/>
+
+    <import resource="applicationContext-S00001.xml"/>
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -11,21 +19,21 @@
         </property>
     </bean>
 
-    <bean id="cepEngineRunner" class="com.cloudine.bigdata.cep.service.engine.CEPEngineRunner">
-        <property name="cepEngineID" value="${service.id}"/>
-    </bean>
+    <!--<util:map id="cepServiceMap" map-class="java.util.TreeMap"-->
+              <!--key-type="java.lang.String"-->
+              <!--value-type="java.lang.Object">-->
+        <!--<entry key="${service.id}" value-ref="cepServiceApplicationRuntime-${service.id}"/>-->
 
-    <bean id="csvOutputAdapterManager"
-          class="com.cloudine.bigdata.cep.service.adapter.output.csv.CSVOutputAdapterManager">
-        <property name="cepEngineID" value="${service.id}"/>
-        <property name="statementName" value="${statement.name}"/>
-    </bean>
+    <!--</util:map>-->
 
-    <bean id="csvInputAdapterManager" class="com.cloudine.bigdata.cep.service.adapter.input.csv.CSVInputAdapterManager">
-        <property name="cepEngineID" value="${service.id}"/>
-        <property name="stream" value="${csv.input.adapter.stream}"/>
-        <property name="resource" value="${csv.input.adapter.resource}"/>
-        <property name="fieldNames" value="${csv.input.adapter.field.names}"/>
-        <property name="fieldTypes" value="${csv.input.adapter.field.types}"/>
-    </bean>
+    <util:set id="cepServiceSet" set-class="java.util.TreeSet"
+              value-type="java.lang.Object">
+        <ref bean="cepServiceApplicationRuntime-${service.id}"/>
+    </util:set>
+
+    <!--<util:list id="emails" list-class="java.util.LinkedList"-->
+               <!--value-type="java.lang.Object">-->
+        <!--<ref bean="cepServiceApplicationRuntime-${service.id}"/>-->
+    <!--</util:list>-->
+
 </beans>
