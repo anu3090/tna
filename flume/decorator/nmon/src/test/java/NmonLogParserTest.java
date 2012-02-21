@@ -1,13 +1,13 @@
-import nmon.common.NmonUtils;
+import com.cloudine.bigdata.log.flume.commons.NmonUtils;
+import com.cloudine.bigdata.log.flume.event.statistics.ZZZZ;
+import com.cloudine.bigdata.log.flume.event.statistics.network.Network;
+import com.cloudine.bigdata.log.flume.event.statistics.network.NetworkImpl;
 import nmon.pojo.header.AAA;
 import nmon.pojo.header.BBBP;
 import nmon.pojo.header.Header;
 import nmon.pojo.header.ProcNetDev;
-import nmon.pojo.statistics.*;
 import nmon.pojo.statistics.disk.Disk;
 import nmon.pojo.statistics.disk.DiskImpl;
-import nmon.pojo.statistics.network.Network;
-import nmon.pojo.statistics.network.NetworkImpl;
 import nmon.pojo.statistics.system.*;
 import org.apache.commons.io.FileUtils;
 import org.junit.Ignore;
