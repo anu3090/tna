@@ -18,13 +18,13 @@
         <property name="cepEngineID" value="${service.id}"/>
     </bean>
 
-    <bean id="csvOutputAdapterManager-S00001"
+    <bean id="csvOutputAdapterManager-S00001-00"
           class="com.cloudine.bigdata.cep.service.adapter.output.csv.CSVOutputAdapterManagerImpl">
         <property name="cepEngineID" value="${service.id}"/>
         <property name="statementName" value="${statement.name}"/>
     </bean>
 
-    <bean id="csvInputAdapterManager-S00001"
+    <bean id="csvInputAdapterManager-S00001-00"
           class="com.cloudine.bigdata.cep.service.adapter.input.csv.CSVInputAdapterManagerImpl">
         <property name="cepEngineID" value="${service.id}"/>
         <property name="stream" value="${csv.input.adapter.stream}"/>
