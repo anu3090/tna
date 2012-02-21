@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <bean id="cepServiceApplicationRuntime-S00001"
+          class="com.cloudine.bigdata.cep.service.runtime.CEPServiceApplicationRuntime">
+        <property name="cepEngineRunner" ref="cepEngineRunner-S00001"/>
+        <property name="outputAdapterSet" ref="outputAdapterSet-S00001"/>
+        <property name="inputAdapterSet" ref="inputAdapterSet-S00001"/>
+    </bean>
+
+    <bean id="cepEngineRunner-S00001" class="com.cloudine.bigdata.cep.service.engine.CEPEngineRunnerImpl">
+        <property name="cepEngineID" value="${service.id}"/>
+    </bean>
+
+    <bean id="csvOutputAdapterManager-S00001"
+          class="com.cloudine.bigdata.cep.service.adapter.output.csv.CSVOutputAdapterManagerImpl">
+        <property name="cepEngineID" value="${service.id}"/>
+        <property name="statementName" value="${statement.name}"/>
+    </bean>
+
+    <bean id="csvInputAdapterManager-S00001"
+          class="com.cloudine.bigdata.cep.service.adapter.input.csv.CSVInputAdapterManagerImpl">
+        <property name="cepEngineID" value="${service.id}"/>
+        <property name="stream" value="${csv.input.adapter.stream}"/>
+        <property name="resource" value="${csv.input.adapter.resource}"/>
+        <property name="fieldNames" value="${csv.input.adapter.field.names}"/>
+        <property name="fieldTypes" value="${csv.input.adapter.field.types}"/>
+    </bean>
+
+    <util:set id="outputAdapterSet-S00001" set-class="java.util.TreeSet"
+              value-type="java.lang.Object">
+        <ref bean="csvOutputAdapterManager-${service.id}"/>
+    </util:set>
+
+    <util:set id="inputAdapterSet-S00001" set-class="java.util.TreeSet"
+              value-type="java.lang.Object">
+        <ref bean="csvInputAdapterManager-${service.id}"/>
+    </util:set>
+
+</beans>
