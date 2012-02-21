@@ -1,5 +1,6 @@
-package com.cloudine.bigdata.cep.service.pojo.nmon.header;
+package nmon.pojo.header;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import java.util.Map;
  * Time: PM 5:36
  * To change this template use File | Settings | File Templates.
  */
-public class Header {
+public class Header  implements Serializable {
     
 //    private AAA;
 //    private BBBP;

@@ -1,4 +1,6 @@
-package com.cloudine.bigdata.cep.service.pojo.nmon.header;
+package nmon.pojo.header;
+
+import java.io.Serializable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -7,7 +9,7 @@ package com.cloudine.bigdata.cep.service.pojo.nmon.header;
  * Time: AM 11:16
  * To change this template use File | Settings | File Templates.
  */
-public class ProcNetDev {
+public class ProcNetDev  implements Serializable {
 
     private String face;
     private String receiveBytes;

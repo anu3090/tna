@@ -1,8 +1,8 @@
 package com.cloudine.bigdata.cep.service.thrift.flume.server;
 
-import com.cloudine.bigdata.cep.service.adapter.input.flume.thrift.TSaneServerSocket;
-import com.cloudine.bigdata.cep.service.adapter.input.flume.thrift.TSaneThreadPoolServer;
-import com.cloudine.bigdata.cep.service.adapter.input.flume.thrift.ThriftFlumeEventServer;
+import com.cloudine.bigdata.cep.service.thrift.flume.TSaneServerSocket;
+import com.cloudine.bigdata.cep.service.thrift.flume.TSaneThreadPoolServer;
+import com.cloudine.bigdata.cep.service.thrift.flume.ThriftFlumeEventServer;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.transport.TTransportException;
 import org.slf4j.Logger;

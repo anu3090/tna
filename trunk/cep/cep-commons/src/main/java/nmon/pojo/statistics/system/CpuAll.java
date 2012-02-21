@@ -1,4 +1,4 @@
-package com.cloudine.bigdata.cep.service.pojo.nmon.statistics.system;
+package nmon.pojo.statistics.system;
 
 import java.io.Serializable;
 
@@ -9,27 +9,37 @@ import java.io.Serializable;
  * Time: PM 3:13
  * To change this template use File | Settings | File Templates.
  */
-public class Cpu implements Serializable {
-    private String cpuName;
+public class CpuAll implements Serializable {
     private String user;
     private String sys;
     private String wait;
     private String idle;
+    private String busy;
+    private String cpus;
 
-    public Cpu(String cpuName, String idle, String sys, String user, String wait) {
-        this.cpuName = cpuName;
-        this.idle = idle;
-        this.sys = sys;
+    public CpuAll(String user, String sys, String wait, String idle, String busy, String cpus) {
         this.user = user;
+        this.sys = sys;
         this.wait = wait;
+        this.idle = idle;
+        this.busy = busy;
+        this.cpus = cpus;
     }
 
-    public String getCpuName() {
-        return cpuName;
+    public String getBusy() {
+        return busy;
     }
 
-    public void setCpuName(String cpuName) {
-        this.cpuName = cpuName;
+    public void setBusy(String busy) {
+        this.busy = busy;
+    }
+
+    public String getCpus() {
+        return cpus;
+    }
+
+    public void setCpus(String cpus) {
+        this.cpus = cpus;
     }
 
     public String getIdle() {
@@ -66,12 +76,13 @@ public class Cpu implements Serializable {
 
     @Override
     public String toString() {
-        return "Cpu{" +
-                "cpuName='" + cpuName + '\'' +
+        return "CpuAll{" +
+                "busy='" + busy + '\'' +
                 ", user='" + user + '\'' +
                 ", sys='" + sys + '\'' +
                 ", wait='" + wait + '\'' +
                 ", idle='" + idle + '\'' +
+                ", cpus='" + cpus + '\'' +
                 '}';
     }
 }
