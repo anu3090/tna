@@ -1,6 +1,6 @@
 package com.cloudine.bigdata.cep.service.thrift.flume.server;
 
-import nmon.pojo.NmonStatistics;
+import com.cloudine.bigdata.log.flume.event.NmonStatistics;
 import com.cloudine.bigdata.cep.service.thrift.flume.ThriftFlumeEvent;
 import com.cloudine.bigdata.cep.service.thrift.flume.ThriftFlumeEventServer;
 import org.apache.thrift.TException;
@@ -18,18 +18,18 @@ import java.io.ObjectInputStream;
  * To change this template use File | Settings | File Templates.
  */
 public class FlumeThriftServerImpl implements ThriftFlumeEventServer.Iface{
-
+    long COUNTER=0;
 
     @Override
     public void append(ThriftFlumeEvent evt) throws TException {
-
+        COUNTER++;
         ByteArrayInputStream bis = new ByteArrayInputStream(evt.getBody());
         ObjectInput in = null;
         NmonStatistics statistics = null;
         try {
             in = new ObjectInputStream(bis);
             statistics = (NmonStatistics)in.readObject();
-            System.out.println(statistics.toString()+"\r");
+            System.out.println(COUNTER+"::"+statistics.toString()+"\r");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
