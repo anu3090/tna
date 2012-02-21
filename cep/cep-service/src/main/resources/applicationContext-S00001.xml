@@ -27,10 +27,16 @@
     <bean id="csvInputAdapterManager-S00001-00"
           class="com.cloudine.bigdata.cep.service.adapter.input.csv.CSVInputAdapterManagerImpl">
         <property name="cepEngineID" value="${service.id}"/>
-        <property name="stream" value="${csv.input.adapter.stream}"/>
-        <property name="resource" value="${csv.input.adapter.resource}"/>
-        <property name="fieldNames" value="${csv.input.adapter.field.names}"/>
-        <property name="fieldTypes" value="${csv.input.adapter.field.types}"/>
+        <property name="stream" value="${S00001-00.csv.input.adapter.stream}"/>
+        <property name="resource" value="${S00001-00.csv.input.adapter.resource}"/>
+        <property name="fieldNames" value="${S00001-00.csv.input.adapter.field.names}"/>
+        <property name="fieldTypes" value="${S00001-00.csv.input.adapter.field.types}"/>
+    </bean>
+
+    <bean id="httpInputAdapterManager-S00001-00"
+          class="com.cloudine.bigdata.cep.service.adapter.input.http.HTTPInputAdapterManagerImpl">
+        <property name="cepEngineID" value="${service.id}"/>
+        <property name="port" value="${S00001-00.http.input.adapter.port}"/>
     </bean>
 
     <util:set id="outputAdapterSet-S00001" set-class="java.util.TreeSet"
@@ -39,8 +45,9 @@
     </util:set>
 
     <util:set id="inputAdapterSet-S00001" set-class="java.util.TreeSet"
-              value-type="java.lang.Object">
+              value-type="com.cloudine.bigdata.cep.service.adapter.AbstractAdapterManagerImpl">
         <ref bean="csvInputAdapterManager-${service.id}-00"/>
+        <!--<ref bean="httpInputAdapterManager-${service.id}-00"/>-->
     </util:set>
 
 </beans>

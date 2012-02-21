@@ -8,10 +8,18 @@ import com.espertech.esper.client.EPServiceProvider;
  * @author <a href=mailto:iamtedwon@gmail.com">Ted Won</a>
  * @version 1.0
  */
-public class AbstractAdapterManagerImpl implements AdapterManager {
+public abstract class AbstractAdapterManagerImpl implements AdapterManager {
 
+    /**
+     * CEP Engine ID.
+     */
     protected String cepEngineID;
 
+    /**
+     * Current State.
+     * <p/>
+     * STOPPED, ACTIVE
+     */
     protected EPServiceProvider cepServiceEngine;
 
     /**
@@ -21,22 +29,16 @@ public class AbstractAdapterManagerImpl implements AdapterManager {
      */
     protected String state = "STOPPED";
 
+    public abstract void start() throws Exception;
+
+    public abstract void stop() throws Exception;
+
     public String getCepEngineID() {
         return cepEngineID;
     }
 
     public void setCepEngineID(String cepEngineID) {
         this.cepEngineID = cepEngineID;
-    }
-
-    @Override
-    public void start() throws Exception {
-
-    }
-
-    @Override
-    public void stop() throws Exception {
-
     }
 
     public String getState() {
