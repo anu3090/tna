@@ -19,21 +19,12 @@
         </property>
     </bean>
 
-    <!--<util:map id="cepServiceMap" map-class="java.util.TreeMap"-->
-              <!--key-type="java.lang.String"-->
-              <!--value-type="java.lang.Object">-->
-        <!--<entry key="${service.id}" value-ref="cepServiceApplicationRuntime-${service.id}"/>-->
-
-    <!--</util:map>-->
 
     <util:set id="cepServiceSet" set-class="java.util.TreeSet"
               value-type="java.lang.Object">
         <ref bean="cepServiceApplicationRuntime-${service.id}"/>
+        <ref bean="cepServiceApplicationRuntime-${service.id}"/>
     </util:set>
 
-    <!--<util:list id="emails" list-class="java.util.LinkedList"-->
-               <!--value-type="java.lang.Object">-->
-        <!--<ref bean="cepServiceApplicationRuntime-${service.id}"/>-->
-    <!--</util:list>-->
 
 </beans>

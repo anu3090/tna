@@ -1,6 +1,6 @@
 package com.cloudine.bigdata.cep.service.adapter.input.csv;
 
-import com.cloudine.bigdata.cep.service.adapter.AbstractAdapterManager;
+import com.cloudine.bigdata.cep.service.adapter.AbstractAdapterManagerImpl;
 import com.cloudine.bigdata.cep.service.utils.DataTypeResolver;
 import com.espertech.esper.adapter.InputAdapter;
 import com.espertech.esper.client.EPServiceProviderManager;
@@ -21,7 +21,7 @@ import java.util.Map;
  * @author <a href=mailto:iamtedwon@gmail.com">Ted Won</a>
  * @version 1.0
  */
-public class CSVInputAdapterManagerImpl extends AbstractAdapterManager {
+public class CSVInputAdapterManagerImpl extends AbstractAdapterManagerImpl {
     /**
      * SLF4J Logging
      */

@@ -35,12 +35,12 @@
 
     <util:set id="outputAdapterSet-S00001" set-class="java.util.TreeSet"
               value-type="java.lang.Object">
-        <ref bean="csvOutputAdapterManager-${service.id}"/>
+        <ref bean="csvOutputAdapterManager-${service.id}-00"/>
     </util:set>
 
     <util:set id="inputAdapterSet-S00001" set-class="java.util.TreeSet"
               value-type="java.lang.Object">
-        <ref bean="csvInputAdapterManager-${service.id}"/>
+        <ref bean="csvInputAdapterManager-${service.id}-00"/>
     </util:set>
 
 </beans>

@@ -1,6 +1,6 @@
 package com.cloudine.bigdata.cep.service.adapter.output.csv;
 
-import com.cloudine.bigdata.cep.service.adapter.AbstractAdapterManager;
+import com.cloudine.bigdata.cep.service.adapter.AbstractAdapterManagerImpl;
 import com.espertech.esper.client.EPServiceProviderManager;
 import com.espertech.esper.client.EPStatement;
 import com.espertech.esper.client.EventBean;
@@ -16,7 +16,7 @@ import static org.springframework.util.Assert.notNull;
  * @author <a href=mailto:iamtedwon@gmail.com">Ted Won</a>
  * @version 1.0
  */
-public class CSVOutputAdapterManagerImpl extends AbstractAdapterManager {
+public class CSVOutputAdapterManagerImpl extends AbstractAdapterManagerImpl {
 
     /**
      * SLF4J Logging.

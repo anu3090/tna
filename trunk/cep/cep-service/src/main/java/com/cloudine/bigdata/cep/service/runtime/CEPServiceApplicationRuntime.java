@@ -1,6 +1,6 @@
 package com.cloudine.bigdata.cep.service.runtime;
 
-import com.cloudine.bigdata.cep.service.adapter.AbstractAdapterManager;
+import com.cloudine.bigdata.cep.service.adapter.AbstractAdapterManagerImpl;
 import com.cloudine.bigdata.cep.service.engine.CEPEngineRunnerImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +23,9 @@ public class CEPServiceApplicationRuntime {
 
     private CEPEngineRunnerImpl cepEngineRunner;
 
-    private Set<AbstractAdapterManager> outputAdapterSet;
+    private Set<AbstractAdapterManagerImpl> outputAdapterSet;
 
-    private Set<AbstractAdapterManager> inputAdapterSet;
+    private Set<AbstractAdapterManagerImpl> inputAdapterSet;
 
     public void start() throws Exception {
 
@@ -34,22 +34,22 @@ public class CEPServiceApplicationRuntime {
         System.out.println(outputAdapterSet);
         System.out.println(inputAdapterSet);
 
-        for(AbstractAdapterManager outputAdapter : outputAdapterSet) {
+        for(AbstractAdapterManagerImpl outputAdapter : outputAdapterSet) {
             outputAdapter.start();
         }
 
-        for(AbstractAdapterManager inputAdapter : inputAdapterSet) {
+        for(AbstractAdapterManagerImpl inputAdapter : inputAdapterSet) {
             inputAdapter.start();
         }
     }
 
     public void stop() throws Exception {
 
-        for(AbstractAdapterManager inputAdapter : inputAdapterSet) {
+        for(AbstractAdapterManagerImpl inputAdapter : inputAdapterSet) {
             inputAdapter.stop();
         }
 
-        for(AbstractAdapterManager outputAdapter : outputAdapterSet) {
+        for(AbstractAdapterManagerImpl outputAdapter : outputAdapterSet) {
             outputAdapter.start();
         }
 
@@ -64,19 +64,19 @@ public class CEPServiceApplicationRuntime {
         this.cepEngineRunner = cepEngineRunner;
     }
 
-    public Set<AbstractAdapterManager> getOutputAdapterSet() {
+    public Set<AbstractAdapterManagerImpl> getOutputAdapterSet() {
         return outputAdapterSet;
     }
 
-    public void setOutputAdapterSet(Set<AbstractAdapterManager> outputAdapterSet) {
+    public void setOutputAdapterSet(Set<AbstractAdapterManagerImpl> outputAdapterSet) {
         this.outputAdapterSet = outputAdapterSet;
     }
 
-    public Set<AbstractAdapterManager> getInputAdapterSet() {
+    public Set<AbstractAdapterManagerImpl> getInputAdapterSet() {
         return inputAdapterSet;
     }
 
-    public void setInputAdapterSet(Set<AbstractAdapterManager> inputAdapterSet) {
+    public void setInputAdapterSet(Set<AbstractAdapterManagerImpl> inputAdapterSet) {
         this.inputAdapterSet = inputAdapterSet;
     }
 }
