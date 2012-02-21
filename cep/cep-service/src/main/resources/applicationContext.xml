@@ -20,11 +20,10 @@
     </bean>
 
 
-    <util:set id="cepServiceSet" set-class="java.util.TreeSet"
-              value-type="java.lang.Object">
+    <util:list id="cepServiceList" list-class="java.util.LinkedList"
+               value-type="com.cloudine.bigdata.cep.service.runtime.CEPServiceApplicationRuntime">
         <ref bean="cepServiceApplicationRuntime-${service.id}"/>
-        <ref bean="cepServiceApplicationRuntime-${service.id}"/>
-    </util:set>
+    </util:list>
 
 
 </beans>

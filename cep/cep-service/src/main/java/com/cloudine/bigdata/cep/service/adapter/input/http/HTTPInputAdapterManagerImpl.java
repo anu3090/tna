@@ -33,20 +33,20 @@ public class HTTPInputAdapterManagerImpl extends AbstractAdapterManagerImpl {
         adapterConfig = new ConfigurationHTTPAdapter();
 
         try {
-            
+
             this.configure(adapterConfig, port);
 
             iohttpAdapter = new EsperIOHTTPAdapter(adapterConfig, cepEngineID);
             iohttpAdapter.start();
-            
+
         } catch (Exception e) {
-            
+
             String message = "[" + cepEngineID + "] HTTP Input Adapter Failed to start: ";
             logger.error(message, e);
             logger.error("port= {}", port);
             throw new Exception(message, e);
         }
-        
+
         state = "ACTIVE";
 
         logger.info("[{}] HTTP Input Adapter Started successfully.", cepEngineID);
@@ -58,11 +58,11 @@ public class HTTPInputAdapterManagerImpl extends AbstractAdapterManagerImpl {
         logger.info("[{}] HTTP Input Adapter Stopping..................", cepEngineID);
 
         if (iohttpAdapter != null) {
-            
+
             new Thread(new Runnable() {
-                
+
                 public void run() {
-                    
+
                     iohttpAdapter.destroy();
                     iohttpAdapter = null;
                     adapterConfig = null;
@@ -76,13 +76,12 @@ public class HTTPInputAdapterManagerImpl extends AbstractAdapterManagerImpl {
     }
 
     public void configure(ConfigurationHTTPAdapter adapterConfig, String port) {
-        
+
         String xml = "<?xml version='1.0' encoding='UTF-8'?>\n" +
                 "<esperio-http-configuration xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'\n" +
                 "                            xmlns='http://www.espertech.com/schema/esperio-http'\n" +
                 "                            xsi:noNamespaceSchemaLocation='esperio-http-configuration-4-0.xsd'>\n" +
                 "\t<service name='cepHTTPService' port='" + port + "' nio='true'/>\n" +
-                "\n" +
                 "\t<get service='cepHTTPService' pattern='*'/>\n" +
                 "</esperio-http-configuration>";
 

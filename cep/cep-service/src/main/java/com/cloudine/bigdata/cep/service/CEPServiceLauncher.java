@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * CEP Service Launcher Class.
@@ -29,24 +29,23 @@ public class CEPServiceLauncher {
         });
 
 
-        Set<CEPServiceApplicationRuntime> cepServiceSet = (Set<CEPServiceApplicationRuntime>) applicationContext.getBean("cepServiceSet");
+        List<CEPServiceApplicationRuntime> cepServiceList = (List<CEPServiceApplicationRuntime>) applicationContext.getBean("cepServiceList");
 
-        System.out.println(cepServiceSet);
+        System.out.println(cepServiceList);
 
-        for (CEPServiceApplicationRuntime cepService : cepServiceSet) {
+        for (CEPServiceApplicationRuntime cepService : cepServiceList) {
             cepService.start();
         }
 
-        for (CEPServiceApplicationRuntime cepService : cepServiceSet) {
-            cepService.stop();
-        }
-
-//        applicationContext.registerShutdownHook();
-
-        // wait infinitely
-//        synchronized (CEPServiceLauncher.class) {
-//            CEPServiceLauncher.class.wait();
+//        for (CEPServiceApplicationRuntime cepService : cepServiceList) {
+//            cepService.stop();
 //        }
 
+        applicationContext.registerShutdownHook();
+
+        // wait infinitely
+        synchronized (CEPServiceLauncher.class) {
+            CEPServiceLauncher.class.wait();
+        }
     }
 }

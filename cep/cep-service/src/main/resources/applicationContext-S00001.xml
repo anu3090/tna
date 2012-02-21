@@ -8,10 +8,10 @@
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <bean id="cepServiceApplicationRuntime-S00001"
-          class="com.cloudine.bigdata.cep.service.runtime.CEPServiceApplicationRuntime">
+          class="com.cloudine.bigdata.cep.service.runtime.CEPServiceApplicationRuntimeImpl">
         <property name="cepEngineRunner" ref="cepEngineRunner-S00001"/>
-        <property name="outputAdapterSet" ref="outputAdapterSet-S00001"/>
-        <property name="inputAdapterSet" ref="inputAdapterSet-S00001"/>
+        <property name="outputAdapterList" ref="outputAdapterList-S00001"/>
+        <property name="inputAdapterList" ref="inputAdapterList-S00001"/>
     </bean>
 
     <bean id="cepEngineRunner-S00001" class="com.cloudine.bigdata.cep.service.engine.CEPEngineRunnerImpl">
@@ -39,15 +39,15 @@
         <property name="port" value="${S00001-00.http.input.adapter.port}"/>
     </bean>
 
-    <util:set id="outputAdapterSet-S00001" set-class="java.util.TreeSet"
-              value-type="java.lang.Object">
+    <util:list id="outputAdapterList-S00001" list-class="java.util.LinkedList"
+               value-type="com.cloudine.bigdata.cep.service.adapter.AbstractAdapterManagerImpl">
         <ref bean="csvOutputAdapterManager-${service.id}-00"/>
-    </util:set>
+    </util:list>
 
-    <util:set id="inputAdapterSet-S00001" set-class="java.util.TreeSet"
-              value-type="com.cloudine.bigdata.cep.service.adapter.AbstractAdapterManagerImpl">
+    <util:list id="inputAdapterList-S00001" list-class="java.util.LinkedList"
+               value-type="com.cloudine.bigdata.cep.service.adapter.AbstractAdapterManagerImpl">
         <ref bean="csvInputAdapterManager-${service.id}-00"/>
-        <!--<ref bean="httpInputAdapterManager-${service.id}-00"/>-->
-    </util:set>
+        <ref bean="httpInputAdapterManager-${service.id}-00"/>
+    </util:list>
 
 </beans>
