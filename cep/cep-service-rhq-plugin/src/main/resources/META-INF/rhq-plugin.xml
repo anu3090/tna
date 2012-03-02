@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<plugin name="CEPServicePlugin"
+        displayName="CEP Service JMX Plugin"
+        description="CEP Service Monitor JMX Plugin"
+        version="1.0"
+        xsi:noNamespaceSchemaLocation="rhq-plugin.xsd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="urn:xmlns:rhq-plugin"
+        xmlns:c="urn:xmlns:rhq-configuration">
+
+    <depends plugin="JMX" useClasses="true"/>
+
+    <service name="CEP Services"
+             description="CEP Service Monitor"
+             discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
+             class="org.rhq.plugins.jmx.MBeanResourceComponent">
+
+        <runs-inside>
+            <parent-resource-type name="JMX Server" plugin="JMX"/>
+        </runs-inside>
+
+        <plugin-configuration>
+            <c:simple-property name="objectName"
+                               default="cep.service.app:type=%type%,id=CEPEngineRunner"/>
+            <c:simple-property name="nameTemplate"
+                               default="{type}"/>
+            <c:simple-property name="descriptionTemplate" default="{type} CEP Service Application"/>
+            <c:simple-property name="type" type="string" description="CEP Service Id"/>
+            <c:simple-property name="version" type="string" description="0.0.1"/>
+        </plugin-configuration>
+
+        <metric property="EngineInputCount"
+                 displayName="Total Event Count (events)"
+                 defaultOn="true"
+                 displayType="summary"
+                 defaultInterval="30000"
+                 units="none"
+                 description="Total Event Count (events)"/>
+
+        <metric property="EngineThroughput"
+                 displayName="Throughput (events/second)"
+                 defaultOn="true"
+                 displayType="summary"
+                 defaultInterval="30000"
+                 units="none"
+                 description="Service Throughput (events/second)"/>
+
+        <metric property="EngineLatency"
+                 displayName="Latency (microseconds)"
+                 defaultOn="true"
+                 displayType="summary"
+                 defaultInterval="30000"
+                 units="none"
+                 description="Service Latency (microseconds)"/>
+
+    </service>
+
+</plugin>
