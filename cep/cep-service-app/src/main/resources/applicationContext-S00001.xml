@@ -8,24 +8,24 @@
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <bean id="cepServiceApplicationRuntime-S00001"
-          class="com.cloudine.bigdata.cep.service.runtime.CEPServiceApplicationRuntimeImpl">
+          class="com.tna.cep.service.runtime.CEPServiceApplicationRuntimeImpl">
         <property name="cepEngineRunner" ref="cepEngineRunner-S00001"/>
         <property name="outputAdapterList" ref="outputAdapterList-S00001"/>
         <property name="inputAdapterList" ref="inputAdapterList-S00001"/>
     </bean>
 
-    <bean id="cepEngineRunner-S00001" class="com.cloudine.bigdata.cep.service.engine.CEPEngineRunnerImpl">
+    <bean id="cepEngineRunner-S00001" class="com.tna.cep.service.engine.CEPEngineRunnerImpl">
         <property name="cepEngineID" value="${service.id}"/>
     </bean>
 
     <bean id="csvOutputAdapterManager-S00001-00"
-          class="com.cloudine.bigdata.cep.service.adapter.output.csv.CSVOutputAdapterManagerImpl">
+          class="com.tna.cep.service.adapter.output.csv.CSVOutputAdapterManagerImpl">
         <property name="cepEngineID" value="${service.id}"/>
         <property name="statementName" value="${statement.name}"/>
     </bean>
 
     <bean id="csvInputAdapterManager-S00001-00"
-          class="com.cloudine.bigdata.cep.service.adapter.input.csv.CSVInputAdapterManagerImpl">
+          class="com.tna.cep.service.adapter.input.csv.CSVInputAdapterManagerImpl">
         <property name="cepEngineID" value="${service.id}"/>
         <property name="stream" value="${S00001-00.csv.input.adapter.stream}"/>
         <property name="resource" value="${S00001-00.csv.input.adapter.resource}"/>
@@ -34,18 +34,18 @@
     </bean>
 
     <bean id="httpInputAdapterManager-S00001-00"
-          class="com.cloudine.bigdata.cep.service.adapter.input.http.HTTPInputAdapterManagerImpl">
+          class="com.tna.cep.service.adapter.input.http.HTTPInputAdapterManagerImpl">
         <property name="cepEngineID" value="${service.id}"/>
         <property name="port" value="${S00001-00.http.input.adapter.port}"/>
     </bean>
 
     <util:list id="outputAdapterList-S00001" list-class="java.util.LinkedList"
-               value-type="com.cloudine.bigdata.cep.service.adapter.AbstractAdapterManagerImpl">
+               value-type="com.tna.cep.service.adapter.AbstractAdapterManagerImpl">
         <ref bean="csvOutputAdapterManager-${service.id}-00"/>
     </util:list>
 
     <util:list id="inputAdapterList-S00001" list-class="java.util.LinkedList"
-               value-type="com.cloudine.bigdata.cep.service.adapter.AbstractAdapterManagerImpl">
+               value-type="com.tna.cep.service.adapter.AbstractAdapterManagerImpl">
         <!--<ref bean="csvInputAdapterManager-${service.id}-00"/>-->
         <ref bean="httpInputAdapterManager-${service.id}-00"/>
     </util:list>

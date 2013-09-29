@@ -21,7 +21,7 @@
 
 
     <util:list id="cepServiceList" list-class="java.util.LinkedList"
-               value-type="com.cloudine.bigdata.cep.service.runtime.CEPServiceApplicationRuntime">
+               value-type="com.tna.cep.service.runtime.CEPServiceApplicationRuntime">
         <ref bean="cepServiceApplicationRuntime-${service.id}"/>
     </util:list>
 
